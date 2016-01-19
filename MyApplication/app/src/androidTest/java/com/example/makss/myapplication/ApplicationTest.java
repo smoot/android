@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.makss.myapplication;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
