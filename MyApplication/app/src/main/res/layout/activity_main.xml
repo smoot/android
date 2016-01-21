@@ -4,12 +4,36 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/quantity"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="quantity">
-    </TextView>
+        android:baselineAligned="false">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inbox"
+            android:id="@+id/viewInbox"
+            android:onClick="onInboxClick"
+            android:background="@android:color/background_light" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sent"
+            android:id="@+id/viewSent"
+            android:onClick="onSentClick"
+            android:autoText="true"
+            android:background="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="quantity">
+        </TextView>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list"

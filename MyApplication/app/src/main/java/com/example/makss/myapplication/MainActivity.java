@@ -2,16 +2,25 @@ package com.example.makss.myapplication;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.R.color;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
     ArrayList<SMSData> smsList = new ArrayList<>();
     ListAdapter listAdapter;
+    ListView lvMain;
+    Button viewInbox;
+    Button viewSent;
 
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -20,19 +29,38 @@ public class MainActivity extends Activity {
 
         // создаем адаптер
 
-        fillData();
+
         listAdapter = new ListAdapter(this, smsList);
 
         // настраиваем список
-        ListView lvMain = (ListView) findViewById(R.id.list);
-        lvMain.setAdapter(listAdapter);
+
+        lvMain = (ListView) findViewById(R.id.list);
+
+        viewInbox = (Button) findViewById(R.id.viewInbox);
+        viewSent = (Button) findViewById(R.id.viewSent);
+
+    }
+
+
+
+    public void onInboxClick(View view)
+    {
+        fillData("inbox");
+        viewInbox.setBackgroundColor(Color.BLUE);
+        viewSent.setBackgroundColor(0xffffffff);
+    }
+
+    public void onSentClick(View view)
+    {
+        fillData("sent");
+        viewInbox.setBackgroundColor(0xffffffff);
+        viewSent.setBackgroundColor(Color.BLUE);
     }
 
     // генерируем данные для адаптера
-    void fillData() {
-        Uri uri = Uri.parse("content://sms/sent");
-        Cursor c= getContentResolver().query(uri, null, null ,null,null);
-        startManagingCursor(c);
+    void fillData(String smsfolder) {
+        smsList.clear();
+        Cursor c = getSMSData(smsfolder);
 
         TextView quantity = (TextView)findViewById(R.id.quantity);
         if (c != null) {
@@ -54,119 +82,36 @@ public class MainActivity extends Activity {
             c.close();
         }
 
-        /*for (int i = 1; i <= 20; i++) {
-            smsList.add(new SMSData("SMSData " + i, i * 1000,
-                    R.drawable.ic_launcher, false));
-        }*/
+        lvMain.setAdapter(listAdapter);
     }
 
-    /*// выводим информацию о корзине
-    public void showResult(View v) {
-        String result = "Товары в корзине:";
-        for (SMSData p : listAdapter.getBox()) {
-            if (p.box)
-                result += "\n" + p.name;
+    Cursor getSMSData(String smsfolder) {
+        Uri uri = Uri.parse("content://sms/inbox");
+
+        switch (smsfolder){
+            case "inbox":
+                uri = Uri.parse("content://sms/inbox");
+                break;
+            case "sent":
+                uri = Uri.parse("content://sms/sent");
+                break;
+            case "draft":
+                uri = Uri.parse("content://sms/draft");
+                break;
+            case "outbox":
+                uri = Uri.parse("content://sms/outbox");
+                break;
         }
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-    }*/
 
-
-    /*// Set smsList in the ListAdapter
-    setListAdapter(new ListAdapter(this, smsList));*/
+        Cursor c= getContentResolver().query(uri, null, null ,null,null);
+        return c;
+    };
 
 }
 
-/*import android.app.Activity;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-public class MainActivity extends Activity {
-
-    String[] names = { "Иван", "Марья", "Петр", "Антон", "Даша", "Борис",
-            "Костя", "Игорь", "Анна", "Денис", "Андрей" };
-
-    *//** Called when the activity is first created. *//*
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // находим список
-        ListView lvMain = (ListView) findViewById(R.id.list);
-
-        // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, names);
-
-        // присваиваем адаптер списку
-        lvMain.setAdapter(adapter);
-
-    }
-}*/
-
-/*
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.ListActivity;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class MainActivity extends ListActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        List<SMSData> smsList = new ArrayList<SMSData>();
-
-        Uri uri = Uri.parse("content://sms/sent");
-        Cursor c= getContentResolver().query(uri, null, null ,null,null);
-        startManagingCursor(c);
-
-        TextView quantity = (TextView)findViewById(R.id.quantity);
-        quantity.setText(String.valueOf(c.getCount()));
-
-        // Read the sms data and store it in the list
-        if(c.moveToFirst()) {
-            for(int i=0; i < c.getCount(); i++) {
-                SMSData sms = new SMSData();
-                sms.setBody(c.getString(c.getColumnIndexOrThrow("body")));
-                sms.setNumber(c.getString(c.getColumnIndexOrThrow("address")));
-                smsList.add(sms);
-
-                c.moveToNext();
-            }
-        }
-        if (c != null) {
-            c.close();
-        }
-
-        // Set smsList in the ListAdapter
-        setListAdapter(new ListAdapter(this, smsList));
-
-     */
-/*   // находим список
-        ListView lvMain = (ListView) findViewById(R.id.lvMain);
-
-        // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, names);
-
-        // присваиваем адаптер списку
-        lvMain.setAdapter(adapter);*//*
-
-
-    }
-
-    @Override
+    /*@Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         SMSData sms = (SMSData)getListAdapter().getItem(position);
 
@@ -174,5 +119,5 @@ public class MainActivity extends ListActivity {
 
     }
 
-}
-*/
+}*/
+
