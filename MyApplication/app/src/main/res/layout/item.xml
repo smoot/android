@@ -17,4 +17,5 @@
         android:text="@string/smsBodyText">
     </TextView>
 
+
 </LinearLayout>
