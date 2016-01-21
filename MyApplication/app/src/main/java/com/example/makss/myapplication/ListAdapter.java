@@ -32,10 +32,13 @@ public class ListAdapter extends ArrayAdapter<SMSData> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.activity_main, parent, false);
+        View rowView = inflater.inflate(R.layout.item, parent, true);
 
         TextView senderNumber = (TextView) rowView.findViewById(R.id.smsNumberText);
         senderNumber.setText(smsList.get(position).getNumber());
+
+        TextView BodyText = (TextView) rowView.findViewById(R.id.smsBodyText);
+        BodyText.setText(smsList.get(position).getBody());
 
         return rowView;
     }
