@@ -38,9 +38,7 @@ public class SMSDataParser {
     }
 
     private SMSDataParse parse(SMSData input) {
-        String phrase = input.getBody();
-        String delims = "\\. ";
-        String[] tokens = phrase.split(delims);
+        String[] tokens = input.getBody().split("\\. ");
         SMSDataParse result = new SMSDataParse();
 
         /*0 = {String@831718550832} "Pokupka"
@@ -65,13 +63,16 @@ public class SMSDataParser {
     }
 
     private float getPrice(String[] st) {
-        int pos = 3;
-        for (int i=0; i<st.length; i++)
-            if (st[i].equals("Summ"))
-                pos=i+1; //ToDo Ex + break
+        Float result = null;
+        for (int i = 0; i < st.length; i++)
+            if (st[i].contains("Summ")) {
+                String[] tokens = st[i].split(" ");
+                for (int l = 0; l < tokens.length; l++)
+                    if (tokens[l].contains("Summ")) {
+                        result = Float.parseFloat(tokens[l + 1]);
+                    }
 
-        float result = Float.parseFloat(st[pos]);
-
+            }
         return result;
     }
 
