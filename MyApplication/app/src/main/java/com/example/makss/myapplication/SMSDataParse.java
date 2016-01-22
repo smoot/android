@@ -46,13 +46,14 @@ public class SMSDataParse {
         this.balance = balance;
     }
 
-    public String getProcedure() {
+    public enProcedure getProcedure() {
         return procedure;
     }
 
-    public void setProcedure(String procedure) {
+    public void setProcedure(enProcedure procedure) {
         this.procedure = procedure;
     }
+
 
     /*private String[] columns;
 
@@ -71,7 +72,7 @@ public class SMSDataParse {
     private String location;
     private String place;
     private float balance;
-    private String procedure;
+    private enProcedure procedure;
 
 
   /*  public SMSDataParse(String cost) {

@@ -1,8 +1,6 @@
 package com.example.makss.myapplication;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by makss on 22.01.2016.
@@ -10,7 +8,7 @@ import java.util.Map;
 public class SMSDataParser {
     private ArrayList<SMSData> smsDataList;
     private ArrayList<SMSDataParse> smsDataParseList;
-    private Procedures proc = new Procedures();
+    private Procedure proc = new Procedure();
 
     //Конструктор
     public SMSDataParser(ArrayList<SMSData> smsDataList) {
