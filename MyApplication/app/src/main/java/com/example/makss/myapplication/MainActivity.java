@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
+        parse(getSMSList("inbox", "address LIKE '%Tinko%'"));
 
     }
 

@@ -59,11 +59,25 @@ public class SMSDataParser {
         13 = {String@831718645680} "RUB"
         14 = {String@831718645712} "www.tinkoff.ru"*/
 
-        result.setProcedure(proc.getProcedure(tokens[0]));
+
+        result.setProcedure(proc.getProcedure(tokens[0])); //ToDo null
+//        result.setUser;
+        result.setPrice(getPrice(tokens));
         String aa="";
 
 
 
+
+        return result;
+    }
+
+    private float getPrice(String[] st) {
+        int pos = 3;
+        for (int i=0; i<st.length; i++)
+            if (st[i].equals("Summ"))
+                pos=i+1; //ToDo Ex + break
+
+        float result = Float.parseFloat(st[pos]);
 
         return result;
     }
