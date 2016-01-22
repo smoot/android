@@ -43,21 +43,13 @@ public class SMSDataParser {
         String[] tokens = phrase.split(delims);
         SMSDataParse result = new SMSDataParse();
 
-        /*0 = {String@831718645112} "Pokupka"
-        1 = {String@831718645208} "Kart"
-        2 = {String@831718645240} "*6296"
-        3 = {String@831718645272} "Summ"
-        4 = {String@831718645304} "451.0"
-        5 = {String@831718645336} "RUB"
-        6 = {String@831718645368} "PYATEROCHK"
-        7 = {String@831718645400} "3156"
-        8 = {String@831718645432} "IVANOVO"
-        9 = {String@831718645464} "17.01.201"
-        10 = {String@831718645496} "17:19"
-        11 = {String@831718645528} "Dostupn"
-        12 = {String@831718645560} "24600.6"
-        13 = {String@831718645680} "RUB"
-        14 = {String@831718645712} "www.tinkoff.ru"*/
+        /*0 = {String@831718550832} "Pokupka"
+        1 = {String@831718550928} "Karta *6296"
+        2 = {String@831718550960} "Summa 451.00 RUB"
+        3 = {String@831718550992} "PYATEROCHKA 3156, IVANOVO"
+        4 = {String@831718551024} "17.01.2016 17:19"
+        5 = {String@831718551056} "Dostupno 24600.67 RUB"
+        6 = {String@831718551088} "www.tinkoff.ru"*/
 
 
         result.setProcedure(proc.getProcedure(tokens[0])); //ToDo null
