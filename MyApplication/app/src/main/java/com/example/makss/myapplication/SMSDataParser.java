@@ -39,7 +39,7 @@ public class SMSDataParser {
 
     private SMSDataParse parse(SMSData input) {
         String phrase = input.getBody();
-        String delims = ". ";
+        String delims = "\\. ";
         String[] tokens = phrase.split(delims);
         SMSDataParse result = new SMSDataParse();
 
@@ -61,9 +61,10 @@ public class SMSDataParser {
 
 
         result.setProcedure(proc.getProcedure(tokens[0])); //ToDo null
-//        result.setUser;
+//        result.setUser; //ToDo exec
         result.setPrice(getPrice(tokens));
-        String aa="";
+//        result.setCurrensy  //ToDo exec
+//        result.setLocation(tokens);
 
 
 
