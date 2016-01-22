@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     ArrayList<SMSData> smsList = new ArrayList<>();
-    ListAdapter listAdapter;
     ListView lvMain;
     Button viewInbox, viewSent, viewTinkoff, viewParse;
+    TextView quantity;
     SMSDataParser parser;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -29,37 +29,36 @@ public class MainActivity extends Activity {
         // создаем адаптер
 
 
-        listAdapter = new ListAdapter(this, smsList);
-
         // настраиваем список
-
         lvMain = (ListView) findViewById(R.id.list);
 
+        //Кнопки
         viewInbox = (Button) findViewById(R.id.viewInbox);
         viewSent = (Button) findViewById(R.id.viewSent);
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
+        quantity = (TextView) findViewById(R.id.quantity);
 
 
     }
 
 
     public void onInboxClick(View view) {
-        fillData(getSMSData("inbox", null));
+        fillData(getSMSList("inbox", null));
         viewInbox.setBackgroundColor(Color.BLUE);
         viewSent.setBackgroundColor(0xffffffff);
         viewTinkoff.setBackgroundColor(0xffffffff);
     }
 
     public void onSentClick(View view) {
-        fillData(getSMSData("sent", null));
+        fillData(getSMSList("sent", null));
         viewInbox.setBackgroundColor(0xffffffff);
         viewSent.setBackgroundColor(Color.BLUE);
         viewTinkoff.setBackgroundColor(0xffffffff);
     }
 
     public void onTinkoffClick(View view) {
-        fillData(getSMSData("inbox", "address LIKE '%Tinko%'"));
+        fillData(getSMSList("inbox", "address LIKE '%Tinko%'"));
         viewInbox.setBackgroundColor(0xffffffff);
         viewSent.setBackgroundColor(0xffffffff);
         viewTinkoff.setBackgroundColor(Color.BLUE);
@@ -74,21 +73,26 @@ public class MainActivity extends Activity {
     }
 
     // генерируем данные для адаптера
-    void fillData(Cursor c) {
-        smsList.clear();
+    void fillData(ArrayList<SMSData> l) {
+        ListAdapter listAdapter = new ListAdapter(this, l);
 
-        TextView quantity = (TextView) findViewById(R.id.quantity);
-        if (c != null) {
-            quantity.setText(String.valueOf(c.getCount()));
+        if (l != null) {
+            quantity.setText(String.valueOf(l.size()));
         }
 
+        lvMain.setAdapter(listAdapter);
+    }
+
+    ArrayList<SMSData> getSMSList(String smsfolder, String filter) {
         // Read the sms data and store it in the list
+        ArrayList<SMSData> l = new ArrayList<>();
+        Cursor c = getSMSData(smsfolder, filter);
         if (c != null && c.moveToFirst()) {
             for (int i = 0; i < c.getCount(); i++) {
                 SMSData sms = new SMSData();
                 sms.setBody(c.getString(c.getColumnIndexOrThrow("body")));
                 sms.setNumber(c.getString(c.getColumnIndexOrThrow("address")));
-                smsList.add(sms);
+                l.add(sms);
 
                 c.moveToNext();
             }
@@ -97,7 +101,8 @@ public class MainActivity extends Activity {
             c.close();
         }
 
-        lvMain.setAdapter(listAdapter);
+
+        return l;
     }
 
     Cursor getSMSData(String smsfolder, String filter) {
@@ -124,9 +129,8 @@ public class MainActivity extends Activity {
 
     void parse(Cursor c) {
         parser = new SMSDataParser(c);
-
-
     }
+
 }
 
 
