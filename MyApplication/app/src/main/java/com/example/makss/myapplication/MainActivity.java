@@ -39,7 +39,6 @@ public class MainActivity extends Activity {
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
 
-
     }
 
 
@@ -65,7 +64,7 @@ public class MainActivity extends Activity {
     }
 
     public void onParseClick(View view) {
-        parse(getSMSData("inbox", "address LIKE '%Tinko%'"));
+        parse(getSMSList("inbox", "address LIKE '%Tinko%'"));
         viewInbox.setBackgroundColor(0xffffffff);
         viewSent.setBackgroundColor(0xffffffff);
         viewTinkoff.setBackgroundColor(0xffffffff);
@@ -127,8 +126,9 @@ public class MainActivity extends Activity {
         return c;
     }
 
-    void parse(Cursor c) {
-        parser = new SMSDataParser(c);
+    void parse(ArrayList<SMSData> l) {
+        parser = new SMSDataParser(l);
+        parser.GetSMSDataParse();
     }
 
 }

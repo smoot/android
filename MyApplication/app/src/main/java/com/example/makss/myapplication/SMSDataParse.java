@@ -6,6 +6,53 @@ import java.util.Date;
  * Created by makss on 22.01.2016.
  */
 public class SMSDataParse {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
+    }
+
+    public String getProcedure() {
+        return procedure;
+    }
+
+    public void setProcedure(String procedure) {
+        this.procedure = procedure;
+    }
 
     /*private String[] columns;
 
@@ -13,17 +60,18 @@ public class SMSDataParse {
         return  new String[] {"operation", "user", "date", "price", "location", "place", "balance"};
     }*/
 
-    enum operation {
-        Buy, Input, CashOut, Code, Cashback, Percent, Info, Deny
-    }
     enum user {
         Maks, Alina
     }
-    Date date;
-    float price;
-    String location;
-    String place;
-    float balance;
+    enum currency {
+        RU, USD
+    }
+    private Date date;
+    private float price;
+    private String location;
+    private String place;
+    private float balance;
+    private String procedure;
 
 
   /*  public SMSDataParse(String cost) {
