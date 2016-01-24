@@ -1,21 +1,38 @@
 package com.example.makss.myapplication;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by makss on 22.01.2016.
  */
 public class SMSDataParse {
-    public Date getDate() {
-        return date;
+
+    private Calendar date;
+    private Double coast;
+    private String location;
+    private String place;
+    private Double balance;
+    private enProcedure procedure;
+    private enUser user;
+    private enCurrency currency;
+
+    //Date in local TZ
+    public Calendar getDate() {
+        if (date != null)
+            return date;
+        else return Calendar.getInstance();
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
     public String getLocation() {
-        return location;
+        if (location != null)
+         return location;
+        else return "Unknown";
     }
 
     public void setLocation(String location) {
@@ -30,11 +47,11 @@ public class SMSDataParse {
         this.place = place;
     }
 
-    public float getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -46,52 +63,32 @@ public class SMSDataParse {
         this.procedure = procedure;
     }
 
-    public double getCoast() {
-        return coast;
+    public Double getCoast() {
+        if (coast != null)
+            return coast;
+        else return 0.0;
     }
 
-    public void setCoast(double coast) {
+    public void setCoast(Double coast) {
         this.coast = coast;
     }
 
-
-    /*private String[] columns;
-
-    public String[] getColumns() {
-        return  new String[] {"operation", "user", "date", "coast", "location", "place", "balance"};
-    }*/
-
-    enum user {
-        Maks, Alina
-    }
-    enum currency {
-        RU, USD
-    }
-    private Date date;
-    private double coast;
-    private String location;
-    private String place;
-    private float balance;
-    private enProcedure procedure;
-
-
-  /*  public SMSDataParse(String cost) {
-        this.cost = cost;
+    public enUser getUser() {
+        if (user != null)
+            return user;
+        else return enUser.Unknown;
     }
 
-    public String getNumber() {
-        return number;
+    public void setUser(enUser user) {
+        this.user = user;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public enCurrency getCurrency() {
+        return currency;
     }
 
-    public String getBody() {
-        return body;
+    public void setCurrency(enCurrency currency) {
+        this.currency = currency;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }*/
 }
