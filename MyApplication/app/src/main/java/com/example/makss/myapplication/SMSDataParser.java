@@ -1,6 +1,10 @@
 package com.example.makss.myapplication;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by makss on 22.01.2016.
@@ -19,13 +23,13 @@ public class SMSDataParser {
         smsDataParseList = new ArrayList<>();
         smsDataParseList.clear();
 
-        //Mocking
+        /*//Mock ing
         smsDataList.clear();
         SMSData data = new SMSData();
         data.setBody("Pokupka. Karta *6296. Summa 451.00 RUB. PYATEROCHKA 3156, IVANOVO. 17.01.2016 17:19. Dostupno 24600.67 RUB. www.tinkoff.ru");
         data.setNumber("tinkoff.ru");
-        smsDataList.add(data);
-        //End Mocking
+        smsDataList.add(data);*/
+
         if (smsDataList != null) {
             for (int i = 0; i < smsDataList.size(); i++)
                 smsDataParseList.add(i, parse(smsDataList.get(i)));
@@ -50,29 +54,46 @@ public class SMSDataParser {
         6 = {String@831718551088} "www.tinkoff.ru"*/
 
 
+
+
         result.setProcedure(proc.getProcedure(tokens[0])); //ToDo null
 //        result.setUser; //ToDo exec
-        result.setPrice(getPrice(tokens));
+        result.setCoast(getCoast(tokens));
 //        result.setCurrensy  //ToDo exec
 //        result.setLocation(tokens);
-
-
-
 
         return result;
     }
 
-    private float getPrice(String[] st) {
-        Float result = null;
-        for (int i = 0; i < st.length; i++)
-            if (st[i].contains("Summ")) {
-                String[] tokens = st[i].split(" ");
-                for (int l = 0; l < tokens.length; l++)
-                    if (tokens[l].contains("Summ")) {
-                        result = Float.parseFloat(tokens[l + 1]);
-                    }
-
+    private double getCoast(String[] st) {
+        double result = 0.0;
+            out_loop:
+            for (String s : st) {
+                if (s.contains("Summ")) {
+                    String[] tokens = s.split(" ");
+                    for (int i = 0; i < tokens.length; i++)
+                        if (tokens[i].contains("Summ")) {
+                            result = Double.parseDouble(tokens[i + 1]);
+                            break out_loop;
+                        }
+                }
             }
+        return result;
+    }
+
+    private String findUsage(String[] st, String find, int shift) {
+        String result = "";
+        out_loop:
+        for (String s : st) {
+            if (s.contains(find)) {
+                String[] tokens = s.split(" ");
+                for (int i = 0; i < tokens.length; i++)
+                    if (tokens[i].contains(find)) {
+                        result = tokens[i + shift];
+                        break out_loop;
+                    }
+            }
+        }
         return result;
     }
 

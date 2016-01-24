@@ -14,14 +14,6 @@ public class SMSDataParse {
         this.date = date;
     }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -54,11 +46,19 @@ public class SMSDataParse {
         this.procedure = procedure;
     }
 
+    public double getCoast() {
+        return coast;
+    }
+
+    public void setCoast(double coast) {
+        this.coast = coast;
+    }
+
 
     /*private String[] columns;
 
     public String[] getColumns() {
-        return  new String[] {"operation", "user", "date", "price", "location", "place", "balance"};
+        return  new String[] {"operation", "user", "date", "coast", "location", "place", "balance"};
     }*/
 
     enum user {
@@ -68,7 +68,7 @@ public class SMSDataParse {
         RU, USD
     }
     private Date date;
-    private float price;
+    private double coast;
     private String location;
     private String place;
     private float balance;

@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.R.color;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,10 +36,8 @@ public class MainActivity extends Activity {
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
-        parse(getSMSList("inbox", "address LIKE '%Tinko%'"));
 
     }
-
 
     public void onInboxClick(View view) {
         fillData(getSMSList("inbox", null));
@@ -65,7 +61,7 @@ public class MainActivity extends Activity {
     }
 
     public void onParseClick(View view) {
-        parse(getSMSList("inbox", "address LIKE '%Tinko%'"));
+        fillData(parse(getSMSList("inbox", "address LIKE '%Tinko%'")));
         viewInbox.setBackgroundColor(0xffffffff);
         viewSent.setBackgroundColor(0xffffffff);
         viewTinkoff.setBackgroundColor(0xffffffff);
@@ -127,9 +123,21 @@ public class MainActivity extends Activity {
         return c;
     }
 
-    void parse(ArrayList<SMSData> l) {
+    ArrayList<SMSData> parse(ArrayList<SMSData> l) {
         parser = new SMSDataParser(l);
-        parser.GetSMSDataParse();
+        ArrayList<SMSDataParse> list = parser.GetSMSDataParse();
+        ArrayList<SMSData> newlist = new ArrayList<>();
+        for (SMSDataParse data : list){
+            SMSData sms = new SMSData();
+
+            sms.setBody(data.getProcedure().toString());
+
+            sms.setNumber(Double.toString(data.getCoast()));
+
+            newlist.add(sms);
+        }
+
+        return newlist;
     }
 
 }
