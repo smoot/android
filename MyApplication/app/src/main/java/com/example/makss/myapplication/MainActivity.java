@@ -130,9 +130,9 @@ public class MainActivity extends Activity {
         for (SMSDataParse data : list){
             SMSData sms = new SMSData();
 
-            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString());
+            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString()+" "+Double.toString(data.getBalance()));
 
-            sms.setNumber(Double.toString(data.getCoast()) + " " + String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate())+" "+data.getUser().toString());
+            sms.setNumber(Double.toString(data.getCoast()) + " " + String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()) + " " + data.getUser().toString());
 
             newlist.add(sms);
         }

@@ -156,8 +156,8 @@ public class SMSDataParser {
 
     private enUser parseUser(String s) {
         Map procMap = new HashMap<String, enProcedure>();
-            procMap.put("*6296", enUser.Maks);
-            procMap.put("*5825", enUser.Alina);
+            procMap.put("*6296", enUser.Alina);
+            procMap.put("*5825", enUser.Maks);
 
 
         enUser result = (enUser) procMap.get(getElement(s.split(" "), "Karta", 1));
