@@ -13,7 +13,6 @@ public class SMSDataParser {
     private ArrayList<SMSData> smsDataList;
     private ArrayList<SMSDataParse> smsDataParseList;
 
-    //Конструктор
     public SMSDataParser(ArrayList<SMSData> smsDataList) {
         this.smsDataList = smsDataList;
     }
@@ -22,19 +21,12 @@ public class SMSDataParser {
         smsDataParseList = new ArrayList<>();
         smsDataParseList.clear();
 
-        /*//Mock ing
-        smsDataList.clear();
-        SMSData data = new SMSData();
-        data.setBody("Выписка от 27.12 по карте *5825. Начислено процентов: 304.98 руб. Cashback: 598 руб. Баланс на 27.12: 45879.06 руб. www.tinkoff.ru");
-        data.setNumber("tinkoff.ru");
-        smsDataList.add(data);*/
-
         if (smsDataList != null) for (SMSData item : smsDataList)
             smsDataParseList.addAll(parse(item));
+        /**
+         * return aaaa
+         */
         return smsDataParseList;
-
-        /*if (smsDataList != null) return null;*/
-
 
     }
 
