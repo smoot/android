@@ -23,9 +23,6 @@ public class SMSDataParser {
 
         if (smsDataList != null) for (SMSData item : smsDataList)
             smsDataParseList.addAll(parse(item));
-        /**
-         * return aaaa
-         */
         return smsDataParseList;
 
     }
@@ -33,7 +30,7 @@ public class SMSDataParser {
     private ArrayList<SMSDataParse> parse(SMSData input) {
         String[] tokens = input.getBody().split("\\. ");
         SMSDataParse data = new SMSDataParse();
-        SMSDataParse data2 = new SMSDataParse(); //ToDo saw ugly
+        SMSDataParse data2 = new SMSDataParse();
         ArrayList<SMSDataParse> result = new ArrayList<>();
 
         /*
@@ -53,7 +50,7 @@ public class SMSDataParser {
         */
 
         int procPos, coastPos, userPos, placePos, datePos, balancePos;
-        data.setProcedure(parseProcedure(tokens[0])); //ToDo if null
+        data.setProcedure(parseProcedure(tokens[0]));
         if (data.getProcedure() == enProcedure.Percent) {
             data.setUser(enUser.Maks);                         //User
             data.setLocation("Тинькофф");                      //Location
@@ -66,7 +63,6 @@ public class SMSDataParser {
                     data.setBalance(parseBalance(tokens[i]));       //Balance
             }
             result.add(data);
-            //ToDo Hardcoded
             data2.setProcedure(enProcedure.Cashback);
             data2.setUser(enUser.Maks);                         //User
             data2.setLocation("Тинькофф");
@@ -194,7 +190,6 @@ public class SMSDataParser {
 
     private String getElement(String[] tokens, String find, int shift) {
         String result = "";
-        //Todo Tokens nn
         for (int i = 0; i < tokens.length; i++)
             if (isContain(tokens[i], find))
                 result = tokens[i + shift];
