@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import com.loopj.android.http.*;
+
+import cz.msebera.android.httpclient.Header;
+
 public class MainActivity extends Activity {
 
     ArrayList<SMSData> smsList = new ArrayList<>();
@@ -36,6 +40,7 @@ public class MainActivity extends Activity {
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
+        get();
 
     }
 
@@ -127,10 +132,10 @@ public class MainActivity extends Activity {
         parser = new SMSDataParser(l);
         ArrayList<SMSDataParse> list = parser.GetSMSDataParse();
         ArrayList<SMSData> newlist = new ArrayList<>();
-        for (SMSDataParse data : list){
+        for (SMSDataParse data : list) {
             SMSData sms = new SMSData();
 
-            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString()+" "+Double.toString(data.getBalance()));
+            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString() + " " + Double.toString(data.getBalance()));
 
             sms.setNumber(Double.toString(data.getCoast()) + " " + String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()) + " " + data.getUser().toString());
 
@@ -140,7 +145,34 @@ public class MainActivity extends Activity {
         return newlist;
     }
 
-}
+    void get() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://192.168.56.1:3000", new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String aa = responseBody.toString();
+                String bbb = "";
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+        });
+    }
+
+};
 
 
     /*@Override

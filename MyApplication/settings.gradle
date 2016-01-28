@@ -1,5 +1,2 @@
 include ':app', ':android-async-http'
-<<<<<<< HEAD
-=======
 project(':android-async-http').projectDir = new File('libs/android-async-http')
->>>>>>> test
