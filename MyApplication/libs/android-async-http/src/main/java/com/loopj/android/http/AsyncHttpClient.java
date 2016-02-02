@@ -1166,11 +1166,15 @@ public class AsyncHttpClient {
     /**
      * Perform a HTTP POST request, without any parameters.
      *
+     *
+     * @param client
+     * @param s
+     *@param headers
+     * @param entity
      * @param url             the URL to send the request to.
-     * @param responseHandler the response handler instance that should handle the response.
-     * @return RequestHandle of future request process
+     * @param responseHandler the response handler instance that should handle the response.   @return RequestHandle of future request process
      */
-    public RequestHandle post(String url, ResponseHandlerInterface responseHandler) {
+    public RequestHandle post(AsyncHttpClient client, String s, Header[] headers, HttpEntity entity, String url, ResponseHandlerInterface responseHandler) {
         return post(null, url, null, responseHandler);
     }
 

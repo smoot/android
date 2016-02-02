@@ -12,10 +12,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import com.loopj.android.http.*;
-
-import cz.msebera.android.httpclient.Header;
-
 public class MainActivity extends Activity {
 
     ArrayList<SMSData> smsList = new ArrayList<>();
@@ -23,6 +19,7 @@ public class MainActivity extends Activity {
     Button viewInbox, viewSent, viewTinkoff, viewParse;
     TextView quantity;
     SMSDataParser parser;
+    httpClient client;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +37,12 @@ public class MainActivity extends Activity {
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
-        get();
+        client = new httpClient();
+        //client.asyncGet();
+        client.asyncPost();
 
     }
+
 
     public void onInboxClick(View view) {
         fillData(getSMSList("inbox", null));
@@ -145,32 +145,6 @@ public class MainActivity extends Activity {
         return newlist;
     }
 
-    void get() {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.56.1:3000", new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onStart() {
-                // called before request is started
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String aa = responseBody.toString();
-                String bbb = "";
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-            }
-
-            @Override
-            public void onRetry(int retryNo) {
-                // called when request is retried
-            }
-        });
-    }
 
 };
 
