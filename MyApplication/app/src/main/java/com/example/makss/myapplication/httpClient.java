@@ -20,7 +20,8 @@ public class httpClient {
 
     public httpClient() {
         this.client = new AsyncHttpClient();
-        this.host = "192.168.56.1";
+//        this.host = "192.168.56.1";
+        this.host = "109.60.147.185";
         this.port = "3000";
         this.url = "http://" + host + ":" + port;
         client.addHeader("Content-Type", "application/json");
