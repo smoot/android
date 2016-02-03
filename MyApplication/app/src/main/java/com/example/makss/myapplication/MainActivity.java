@@ -6,20 +6,28 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
+
 public class MainActivity extends Activity {
 
-    ArrayList<SMSData> smsList = new ArrayList<>();
     ListView lvMain;
     Button viewInbox, viewSent, viewTinkoff, viewParse;
     TextView quantity;
     SMSDataParser parser;
     httpClient client;
+    AsyncHttpResponseHandler handler;
+    ListAdapter listAdapter;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +45,38 @@ public class MainActivity extends Activity {
         viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
         viewParse = (Button) findViewById(R.id.viewParse);
         quantity = (TextView) findViewById(R.id.quantity);
+
         client = new httpClient();
-        //client.asyncGet();
-        client.asyncPost();
+
+        handler = new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(MainActivity.this, "Request failure. Status code is " + String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "position is " + String.valueOf(position) + ", id is " + String.valueOf(id), Toast.LENGTH_SHORT).show();
+                RequestParams params = new RequestParams();
+                SMSDataParse data = listAdapter.getSMSDataParseItem(position);
+                params.put("procedure", data.getProcedure().toString());
+                params.put("coast", Double.toString(data.getCoast()));
+                params.put("location", data.getLocation().toString());
+                params.put("data", String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()));
+                params.put("user", data.getUser().toString());
+                params.put("balance", Double.toString(data.getBalance()));
+                client.asyncPost("/", params, handler);
+            }
+        });
 
     }
-
 
     public void onInboxClick(View view) {
         fillData(getSMSList("inbox", null));
@@ -66,22 +100,38 @@ public class MainActivity extends Activity {
     }
 
     public void onParseClick(View view) {
-        fillData(parse(getSMSList("inbox", "address LIKE '%Tinko%'")));
+        fillDataParse(parse(getSMSList("inbox", "address LIKE '%Tinko%'")));
         viewInbox.setBackgroundColor(0xffffffff);
         viewSent.setBackgroundColor(0xffffffff);
         viewTinkoff.setBackgroundColor(0xffffffff);
         viewParse.setBackgroundColor(Color.BLUE);
     }
 
-    // генерируем данные для адаптера
     void fillData(ArrayList<SMSData> l) {
-        ListAdapter listAdapter = new ListAdapter(this, l);
+        listAdapter = new ListAdapter(this, l);
 
         if (l != null) {
             quantity.setText(String.valueOf(l.size()));
         }
 
         lvMain.setAdapter(listAdapter);
+    }
+
+    void fillDataParse(ArrayList<SMSDataParse> l) {
+        ArrayList<SMSData> newlist = new ArrayList<>();
+        for (SMSDataParse data : l) {
+            SMSData sms = new SMSData();
+
+            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString() + " " + Double.toString(data.getBalance()));
+
+            sms.setNumber(Double.toString(data.getCoast()) + " " + String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()) + " " + data.getUser().toString());
+
+            newlist.add(sms);
+        }
+        ;
+        fillData(newlist);
+        listAdapter.setSMSDataParse(l);
+
     }
 
     ArrayList<SMSData> getSMSList(String smsfolder, String filter) {
@@ -128,34 +178,10 @@ public class MainActivity extends Activity {
         return c;
     }
 
-    ArrayList<SMSData> parse(ArrayList<SMSData> l) {
+    ArrayList<SMSDataParse> parse(ArrayList<SMSData> l) {
         parser = new SMSDataParser(l);
         ArrayList<SMSDataParse> list = parser.GetSMSDataParse();
-        ArrayList<SMSData> newlist = new ArrayList<>();
-        for (SMSDataParse data : list) {
-            SMSData sms = new SMSData();
-
-            sms.setBody(data.getProcedure().toString() + " " + data.getLocation().toString() + " " + Double.toString(data.getBalance()));
-
-            sms.setNumber(Double.toString(data.getCoast()) + " " + String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()) + " " + data.getUser().toString());
-
-            newlist.add(sms);
-        }
-
-        return newlist;
+        return list;
     }
 
-
-};
-
-
-    /*@Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        SMSData sms = (SMSData)getListAdapter().getItem(position);
-
-        Toast.makeText(getApplicationContext(), sms.getBody(), Toast.LENGTH_LONG).show();
-
-    }
-
-}*/
-
+}

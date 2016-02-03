@@ -1,25 +1,18 @@
 package com.example.makss.myapplication;
 
-/**
- * Created by makss on 19.01.2016.
- */
-
 import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ListAdapter extends BaseAdapter {
-    Context ctx;
-    LayoutInflater lInflater;
-    ArrayList<SMSData> objects;
+    private Context ctx;
+    private LayoutInflater lInflater;
+    private ArrayList<SMSData> objects;
+    private ArrayList<SMSDataParse> parse = new ArrayList<SMSDataParse>();
 
     ListAdapter(Context context, ArrayList<SMSData> SMSList) {
         ctx = context;
@@ -78,6 +71,15 @@ public class ListAdapter extends BaseAdapter {
         return ((SMSData) getItem(position));
     }
 
+    SMSDataParse getSMSDataParseItem(int position) {
+        return (parse.get(position));
+    }
+
+    public void setSMSDataParse(ArrayList<SMSDataParse> parse) {
+        this.parse = parse;
+    }
+
+}
     /*// содержимое корзины
     ArrayList<SMSData> getBox() {
         ArrayList<SMSData> box = new ArrayList<SMSData>();
@@ -97,7 +99,6 @@ public class ListAdapter extends BaseAdapter {
             getSMSData((Integer) buttonView.getTag()).box = isChecked;
         }
     };*/
-}
 
 /*
 import java.util.List;
