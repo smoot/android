@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
                 params.put("data", String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()));
                 params.put("user", data.getUser().toString());
                 params.put("balance", Double.toString(data.getBalance()));
-                client.asyncPost("/", params, handler);
+                client.asyncPost("/update", params, handler);
             }
         });
 

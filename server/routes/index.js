@@ -9,17 +9,8 @@
   router.get('/', function(req, res, next) {
     res.render('index', {
       title: 'Express',
-      body: req.balance
+      body: JSON.stringify(SMSDataArray)
     });
-  });
-
-  router.post('/*', function(req, res, next) {
-    var reqData;
-    console.log(req.body);
-    reqData = req.body;
-    console.log(reqData);
-    res.statusCode = 200;
-    res.send();
   });
 
   module.exports = router;

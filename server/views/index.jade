@@ -4,3 +4,6 @@ block content
   h1= title
   p Welcome to #{title}
   span #{body}
+  ul
+    each val in body
+      li !{JSON.stringify(val)}

@@ -5,7 +5,8 @@
         <item url="file://$PROJECT_DIR$/routes/index.js" />
         <item url="file://$PROJECT_DIR$/routes/users.js" />
         <item url="file://$PROJECT_DIR$/app.js" />
-        <item url="file://$PROJECT_DIR$/SMSData.js" />
+        <item url="file://$PROJECT_DIR$/routes/update.js" />
+        <item url="file://$PROJECT_DIR$/routes/SMSData.js" />
         <item url="file://$PROJECT_DIR$/bin/www.js" />
       </sourceFilesUrls>
     </properties>
@@ -13,7 +14,8 @@
       <root url="file://$PROJECT_DIR$/routes/index.js" />
       <root url="file://$PROJECT_DIR$/routes/users.js" />
       <root url="file://$PROJECT_DIR$/app.js" />
-      <root url="file://$PROJECT_DIR$/models/SMSData.js" />
+      <root url="file://$PROJECT_DIR$/routes/update.js" />
+      <root url="file://$PROJECT_DIR$/routes/SMSData.js" />
       <root url="file://$PROJECT_DIR$/bin/www.js" />
     </CLASSES>
     <SOURCES />
