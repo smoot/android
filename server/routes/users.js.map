@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "users.js",
+  "sourceRoot": "",
+  "sources": [
+    "users.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAA,OAAA,GAAU,OAAA,CAAQ,SAAR;;EACV,MAAA,GAAS,OAAO,CAAC,MAAR,CAAA;;EAGT,MAAM,CAAC,GAAP,CAAW,GAAX,EAAgB,SAAC,GAAD,EAAM,GAAN,EAAW,IAAX;IACd,GAAG,CAAC,IAAJ,CAAS,yBAAT;EADc,CAAhB;;EAIA,MAAM,CAAC,OAAP,GAAiB;AARjB"
+}
