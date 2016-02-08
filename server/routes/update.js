@@ -66,6 +66,16 @@
       return callback();
     };
 
+    SMSDataList.prototype.getListStringify = function(callback) {
+      var i, item, len, ls;
+      ls = new Array();
+      for (i = 0, len = list.length; i < len; i++) {
+        item = list[i];
+        ls.push(JSON.stringify(item));
+      }
+      return callback(ls);
+    };
+
     return SMSDataList;
 
   })();
@@ -161,9 +171,11 @@
   });
 
   router.get('/list', function(req, res, next) {
-    res.render('index', {
-      title: 'Express',
-      body: SMSDataArray
+    SMSDataArray.getListStringify(function(req) {
+      return res.render('index', {
+        title: 'Express',
+        body: req
+      });
     });
   });
 

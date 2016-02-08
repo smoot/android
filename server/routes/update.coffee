@@ -37,6 +37,12 @@ class SMSDataList
     (console.log JSON.stringify(SMSData)) for SMSData in list
     callback()
 
+  getListStringify: (callback) ->
+    ls = new Array()
+    (ls.push(JSON.stringify(item))) for item in list
+    callback (ls)
+
+
 
 addSMSDataTest = ->
   test = new SMSDataList()
@@ -112,7 +118,8 @@ router.post '/*', (req, res, next) ->
   return
 
 router.get '/list',  (req, res, next) ->
-  res.render('index', {title: 'Express', body: SMSDataArray})
+  SMSDataArray.getListStringify (req) ->
+    res.render('index', {title: 'Express', body: req})
   return
 
 module.exports = router
