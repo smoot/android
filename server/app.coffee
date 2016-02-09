@@ -5,10 +5,22 @@ logger = require('morgan')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 
+
+#Project references
 routes = require('./routes/index')
 users = require('./routes/users')
-update = require('./routes/update')
+update = require('./routes/addSMSData')
+SMSDataList = require('./model/SMSDataList')
 
+###
+Create global objects
+###
+
+global.SMSDataArray = new SMSDataList()
+
+###
+Main
+###
 app = express()
 
 #view engine setup

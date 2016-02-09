@@ -1,8 +1,12 @@
 express = require('express')
 router = express.Router()
-SMSDataList = require('../model/SMSDataList')
 
-SMSDataArray = new SMSDataList()
+router.post '/*', (req, res, next) ->
+  if (req == null || req == "" || req == undefined)
+    error = "Request is undefined"
+    console.log error
+    return next()
+
 router.post '/*', (req, res, next) ->
   console.log req.body
   SMSDataArray.push req.body, (err) ->

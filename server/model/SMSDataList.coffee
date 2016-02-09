@@ -13,7 +13,6 @@ class SMSDataList
         console.log error
         return callback({err: error})
       else
-        console.log "else"
         list.push(obj)
         console.log "Add object to array. Total items is " + list.length
         callback()
