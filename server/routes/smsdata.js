@@ -7,34 +7,36 @@
   router = express.Router();
 
   router.post('/*', function(req, res, next) {
-    var error;
+    var err;
     if (req === null || req === "" || req === void 0) {
-      error = "Request is undefined";
-      console.log(error);
-      return next();
+      err = new Error('Bad request');
+      err.status = 400;
+      return next(err);
     }
+    return next();
   });
 
-  router.post('/*', function(req, res, next) {
+  router.post('/', function(req, res, next) {
     console.log(req.body);
-    SMSDataArray.push(req.body, function(err) {
+    return smsData.push(req.body, function(err) {
       if (err) {
-        throw new Error("Add to array error");
+        err = new Error('POST request error');
+        err.status = 400;
+        return next(err);
       } else {
-        res.statusCode = 200;
-        console.log("FOR");
-        return SMSDataArray.print(function(err) {
+        smsData.print(function(err) {
           if (err) {
             throw new Error("print error");
           }
         });
+        res.statusCode = 200;
+        return res.send();
       }
     });
-    res.render;
   });
 
   router.get('/list', function(req, res, next) {
-    SMSDataArray.getListStringify(function(req) {
+    smsData.getListStringify(function(req) {
       return res.render('index', {
         title: 'Express',
         body: req
@@ -46,4 +48,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=addSMSData.js.map
+//# sourceMappingURL=smsdata.js.map

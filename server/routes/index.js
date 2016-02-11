@@ -9,7 +9,7 @@
   router.get('/', function(req, res, next) {
     res.render('index', {
       title: 'Express',
-      body: JSON.stringify(SMSDataArray)
+      body: JSON.stringify(smsData)
     });
   });
 

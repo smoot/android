@@ -1,10 +1,10 @@
-class SMSDataList
+class smsDataAdapter
   #{@date, @coast, @location, @balance, @procedure, @user, @currency}
   expectedFields = ['coast', 'location', 'procedure']
   list = new Array()
 
   constructor: () ->
-    console.log "Create object SMSDataList"
+    console.log "Create object smsDataAdapter"
 
   push: (obj, callback) ->
     @validate obj, (err) ->
@@ -45,7 +45,7 @@ class SMSDataList
 
 
 addSMSDataTest = ->
-  test = new SMSDataList()
+  test = new smsDataAdapter()
   objGood1 = {
     date: "date"
     coast: "coast"
@@ -98,4 +98,4 @@ addSMSDataTest = ->
 
   return test
 #addSMSDataTest()
-module.exports = SMSDataList
+module.exports = smsDataAdapter

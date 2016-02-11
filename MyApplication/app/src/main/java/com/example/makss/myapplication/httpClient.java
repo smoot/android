@@ -25,6 +25,8 @@ public class httpClient {
         this.port = "3000";
         this.url = "http://" + host + ":" + port;
         client.addHeader("Content-Type", "application/json");
+        client.addHeader("token", "10A8D41FCA841705D8EFF4669578E512502");
+
     }
 
     public void asyncPost(String path, RequestParams params, AsyncHttpResponseHandler handler){

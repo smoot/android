@@ -6,19 +6,19 @@
         <item url="file://$PROJECT_DIR$/routes/users.js" />
         <item url="file://$PROJECT_DIR$/app.js" />
         <item url="file://$PROJECT_DIR$/model/SMSDataList.js" />
-        <item url="file://$PROJECT_DIR$/routes/update.js" />
-        <item url="file://$PROJECT_DIR$/model/init.js" />
+        <item url="file://$PROJECT_DIR$/routes/smsdata.js" />
+        <item url="file://$PROJECT_DIR$/routes/auth.js" />
         <item url="file://$PROJECT_DIR$/bin/www.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/routes/SMSData.js" />
+      <root url="file://$PROJECT_DIR$/model/init.js" />
       <root url="file://$PROJECT_DIR$/routes/index.js" />
       <root url="file://$PROJECT_DIR$/routes/users.js" />
       <root url="file://$PROJECT_DIR$/app.js" />
-      <root url="file://$PROJECT_DIR$/model/SMSDataList.js" />
-      <root url="file://$PROJECT_DIR$/routes/addSMSData.js" />
-      <root url="file://$PROJECT_DIR$/model/init.js" />
+      <root url="file://$PROJECT_DIR$/model/smsDataAdapter.js" />
+      <root url="file://$PROJECT_DIR$/routes/smsdata.js" />
+      <root url="file://$PROJECT_DIR$/routes/auth.js" />
       <root url="file://$PROJECT_DIR$/bin/www.js" />
     </CLASSES>
     <SOURCES />

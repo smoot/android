@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "dbAdapter.js",
+  "sourceRoot": "",
+  "sources": [
+    "dbAdapter.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAM;;;;;;AAAN"
+}

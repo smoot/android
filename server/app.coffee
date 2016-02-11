@@ -9,14 +9,15 @@ bodyParser = require('body-parser')
 #Project references
 routes = require('./routes/index')
 users = require('./routes/users')
-update = require('./routes/addSMSData')
-SMSDataList = require('./model/SMSDataList')
+smsdata = require('./routes/smsdata')
+auth = require('./routes/auth')
+smsDataAdapter = require('./model/smsDataAdapter')
 
 ###
 Create global objects
 ###
 
-global.SMSDataArray = new SMSDataList()
+global.smsData = new smsDataAdapter()
 
 ###
 Main
@@ -35,12 +36,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(require('stylus').middleware(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'public')))
+
+###
+Routes
+###
+
 app.use('/', routes)
+app.use('/', auth)
 app.use('/users', users)
-app.use('/update', update)
+app.use('/smsdata', smsdata)
 
+###
+  Catch 404 and forward to error handler
+###
 
-#catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error('Not Found')
   err.status = 404

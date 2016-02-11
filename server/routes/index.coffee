@@ -4,7 +4,7 @@ router = express.Router()
 
 #GET home page.
 router.get '/',  (req, res, next) ->
-  res.render('index', {title: 'Express', body: JSON.stringify(SMSDataArray)})
+  res.render('index', {title: 'Express', body: JSON.stringify(smsData)})
   return
 
 
