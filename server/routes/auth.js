@@ -8,12 +8,11 @@
 
   router.use('/', function(req, res, next) {
     var err;
-    if (!(req.header('token') === '10A8D41FCA841705D8EFF4669578E512502')) {
+    if (req.header('token') !== '10A8D41FCA841705D8EFF4669578E512502') {
       err = new Error('Not authorized');
       err.status = 401;
       return next(err);
     } else {
-      console.log("next");
       return next();
     }
   });

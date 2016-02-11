@@ -3,7 +3,104 @@
   var dbAdapter;
 
   dbAdapter = (function() {
-    function dbAdapter() {}
+    var _addToSend, _addToUnsend, _removeFromMainList, block, list, listSend, listUnSend;
+
+    list = new Array();
+
+    listSend = new Array();
+
+    listUnSend = new Array();
+
+    block = false;
+
+    _addToUnsend = function(obj, callback) {
+      listUnSend.push(obj);
+      return callback();
+    };
+
+    _addToSend = function(obj, callback) {
+      listSend.push(obj);
+      return callback();
+    };
+
+    _removeFromMainList = function(index, callback) {
+      list.splice(index, 1);
+      return callback();
+    };
+
+    function dbAdapter() {
+      console.log("Create object dbAdapter");
+    }
+
+    dbAdapter.prototype.push = function(obj, callback) {
+      var error;
+      if (!block) {
+        list.push(obj);
+        console.log("Add object to dbAdapter. Total items is " + list.length);
+        return callback();
+      } else {
+        error = "Push blocking, try again";
+        console.log(error);
+        return callback({
+          err: error
+        });
+      }
+    };
+
+    dbAdapter.prototype.send = function(obj, callback) {
+      var j, len;
+      block = true;
+      for (j = 0, len = list.length; j < len; j++) {
+        obj = list[j];
+        this.normalize(obj, function(err) {
+          var error;
+          if (err) {
+            error = "Can't send object to db";
+            console.log(error);
+            _addToUnsend(obj, function(err) {
+              if (err) {
+                return console.log("Error adding to unsend");
+              }
+            });
+            _removeFromMainList(i, function(err) {
+              if (err) {
+                return console.log("Error remove from main list");
+              }
+            });
+            return callback({
+              err: error
+            });
+          } else {
+            return this.commit(obj, function(err) {
+              if (err) {
+                error = "Commit to db failed";
+                console.log(error);
+                return callback({
+                  err: error
+                });
+              } else {
+                return callback();
+              }
+            });
+          }
+        });
+      }
+    };
+
+    dbAdapter.prototype.normalize = function(obj, callback) {};
+
+    dbAdapter.prototype.commit = function(obj, callback) {
+      var error;
+      if (true) {
+        return callback();
+      } else {
+        error = "Commit error";
+        console.log(error);
+        return callback({
+          err: error
+        });
+      }
+    };
 
     return dbAdapter;
 
