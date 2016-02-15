@@ -34,9 +34,8 @@ class smsDataAdapter
 
   getList: (callback) -> callback(list)
 
-  print: (callback) ->
+  print: () ->
     (console.log JSON.stringify(SMSData)) for SMSData in list
-    callback()
 
   getListStringify: (callback) ->
     ls = new Array()

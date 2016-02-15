@@ -1,62 +1,41 @@
 class dbAdapter
-  list = new Array()
-  listSend = new Array()
-  listUnSend = new Array()
-  block = false
-
-  _addToUnsend = (obj, callback) ->
-    listUnSend.push(obj)
-    callback()
-
-  _addToSend = (obj, callback) ->
-    listSend.push(obj)
-    callback()
-
-  _removeFromMainList = (index, callback) ->
-    list.splice(index, 1)
-    callback()
-
+  Firebird = require('node-firebird')
+  options
+    host = '127.0.0.1'
+    port = 3050
+    database = 'database.fdb'
+    user = 'SYSDBA'
+    password = 'masterkey'
 
   constructor: () ->
     console.log "Create object dbAdapter"
 
-  push: (obj, callback) ->
-    if !(block)
-      list.push(obj)
-      console.log "Add object to dbAdapter. Total items is " + list.length
-      return callback()
-    else
-      error = "Push blocking, try again"
-      console.log error
-      return callback({err: error})
-
-  send: (obj, callback) ->
-    block = true
-    (@normalize obj, (err) ->
-      if (err)
+  send: (list, callback) ->
+    commit = @commit
+    (@prepareStatement obj, (st) ->
+      console.log st.statement
+      if (st.err)
         error = "Can't send object to db"
         console.log error
-        _addToUnsend obj, (err) ->
-          if (err)
-            console.log "Error adding to unsend"
-#          TodO Error handler
-        _removeFromMainList i, (err) -> #ToDo I use
-          if (err)
-            console.log "Error remove from main list"
-#          TodO Error handler
         return callback({err: error})
       else
-        @commit obj, (err) ->
+        commit obj, (err) ->
           if (err)
             error = "Commit to db failed"
             console.log error
             return callback({err: error})
           else
-            callback()) for obj in list
+            return callback()
+        return) for obj in list
     return
 
-  normalize: (obj, callback) ->
-    return
+  prepareStatement: (obj, callback) ->
+    if (true)
+      return callback({statement: 'INSERT AAA'})
+    else
+      error = 'Prepare statement error'
+      console.log error
+      return callback({err: error})
 
   commit: (obj, callback) ->
     if true
@@ -66,3 +45,4 @@ class dbAdapter
       console.log error
       return callback({err: error})
 
+module.exports = dbAdapter

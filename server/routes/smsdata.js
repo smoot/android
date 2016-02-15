@@ -17,7 +17,6 @@
   });
 
   router.post('/', function(req, res, next) {
-    console.log(req.body);
     return smsData.push(req.body, function(err) {
       if (err) {
         err = new Error('POST request error');

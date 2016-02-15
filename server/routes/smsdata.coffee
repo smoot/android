@@ -10,7 +10,6 @@ router.post '/*', (req, res, next) ->
   return next()
 
 router.post '/', (req, res, next) ->
-  console.log req.body
   smsData.push req.body, (err) ->
     if (err)
       err = new Error('POST request error')
@@ -27,7 +26,5 @@ router.get '/list',  (req, res, next) ->
   smsData.getListStringify (req) ->
     res.render('index', {title: 'Express', body: req})
   return
-
-
 
 module.exports = router

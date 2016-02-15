@@ -61,13 +61,14 @@
       return callback(list);
     };
 
-    smsDataAdapter.prototype.print = function(callback) {
-      var SMSData, i, len;
+    smsDataAdapter.prototype.print = function() {
+      var SMSData, i, len, results;
+      results = [];
       for (i = 0, len = list.length; i < len; i++) {
         SMSData = list[i];
-        console.log(JSON.stringify(SMSData));
+        results.push(console.log(JSON.stringify(SMSData)));
       }
-      return callback();
+      return results;
     };
 
     smsDataAdapter.prototype.getListStringify = function(callback) {

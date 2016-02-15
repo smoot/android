@@ -3,75 +3,30 @@
   var dbAdapter;
 
   dbAdapter = (function() {
-    var _addToSend, _addToUnsend, _removeFromMainList, block, list, listSend, listUnSend;
+    var Firebird;
 
-    list = new Array();
-
-    listSend = new Array();
-
-    listUnSend = new Array();
-
-    block = false;
-
-    _addToUnsend = function(obj, callback) {
-      listUnSend.push(obj);
-      return callback();
-    };
-
-    _addToSend = function(obj, callback) {
-      listSend.push(obj);
-      return callback();
-    };
-
-    _removeFromMainList = function(index, callback) {
-      list.splice(index, 1);
-      return callback();
-    };
+    Firebird = require('node-firebird');
 
     function dbAdapter() {
       console.log("Create object dbAdapter");
     }
 
-    dbAdapter.prototype.push = function(obj, callback) {
-      var error;
-      if (!block) {
-        list.push(obj);
-        console.log("Add object to dbAdapter. Total items is " + list.length);
-        return callback();
-      } else {
-        error = "Push blocking, try again";
-        console.log(error);
-        return callback({
-          err: error
-        });
-      }
-    };
-
-    dbAdapter.prototype.send = function(obj, callback) {
-      var j, len;
-      block = true;
-      for (j = 0, len = list.length; j < len; j++) {
-        obj = list[j];
-        this.normalize(obj, function(err) {
+    dbAdapter.prototype.send = function(list, callback) {
+      var commit, i, len, obj;
+      commit = this.commit;
+      for (i = 0, len = list.length; i < len; i++) {
+        obj = list[i];
+        this.prepareStatement(obj, function(st) {
           var error;
-          if (err) {
+          console.log(st.statement);
+          if (st.err) {
             error = "Can't send object to db";
             console.log(error);
-            _addToUnsend(obj, function(err) {
-              if (err) {
-                return console.log("Error adding to unsend");
-              }
-            });
-            _removeFromMainList(i, function(err) {
-              if (err) {
-                return console.log("Error remove from main list");
-              }
-            });
             return callback({
               err: error
             });
           } else {
-            return this.commit(obj, function(err) {
+            commit(obj, function(err) {
               if (err) {
                 error = "Commit to db failed";
                 console.log(error);
@@ -87,7 +42,20 @@
       }
     };
 
-    dbAdapter.prototype.normalize = function(obj, callback) {};
+    dbAdapter.prototype.prepareStatement = function(obj, callback) {
+      var error;
+      if (true) {
+        return callback({
+          statement: 'INSERT AAA'
+        });
+      } else {
+        error = 'Prepare statement error';
+        console.log(error);
+        return callback({
+          err: error
+        });
+      }
+    };
 
     dbAdapter.prototype.commit = function(obj, callback) {
       var error;
@@ -105,6 +73,8 @@
     return dbAdapter;
 
   })();
+
+  module.exports = dbAdapter;
 
 }).call(this);
 
