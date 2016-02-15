@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
                 params.put("procedure", data.getProcedure().toString());
                 params.put("coast", Double.toString(data.getCoast()));
                 params.put("location", data.getLocation().toString());
-                params.put("data", String.format("%1$tA %1$tb %1$td %1$tY at %1$tI:%1$tM %1$Tp", data.getDate()));
+                params.put("date", String.format("%1$tb %1$td %1$tY", data.getDate()));
                 params.put("user", data.getUser().toString());
                 params.put("balance", Double.toString(data.getBalance()));
                 client.asyncPost("/smsdata", params, handler);

@@ -22,15 +22,15 @@
         err = new Error('POST request error');
         err.status = 400;
         return next(err);
-      } else {
-        smsData.print(function(err) {
-          if (err) {
-            throw new Error("print error");
-          }
-        });
-        res.statusCode = 200;
-        return res.send();
       }
+      smsData.print(function(err) {
+        if (err) {
+          throw new Error("print error");
+        }
+      });
+      db.fbExpense(req.body);
+      res.statusCode = 200;
+      return res.send();
     });
   });
 
