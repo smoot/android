@@ -90,6 +90,16 @@ smsData.getList (list) ->
   return###
 
 #db.fbSelect()
-#db.fbExpense()
+###setTimeout (db.fbExpense null, (err) ->
+  if (err)
+    throw err),
+  3000###
+
+setTimeout ( ->
+  console.log '3000'
+  db.fbExpense null, (err) ->
+    if (err)
+      throw err
+  ), 2000
 
 module.exports = app

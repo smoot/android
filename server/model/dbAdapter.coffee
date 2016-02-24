@@ -1,142 +1,175 @@
-class db
+class dbAdapter
   Firebird = require('node-firebird')
-  options = {}
-  options.host = '127.0.0.1'
-  options.port = 3050
-  options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
-  #  options.database = "d:\\svn\\github\\MoneyTracker\\test\\MT.FDB"
-  options.user = 'SYSDBA'
-  options.password = 'masterkey'
+  _options = {}
+  _dictionaries = {
+    getLocationId: (locationName) ->
+#      ToDo Find ID from locationName
+      return 33
+    getUserId: (locationName) ->
+#      ToDo Find ID from locationName
+      return 1
+  }
 
   constructor: () ->
+    _options.host = '127.0.0.1'
+    _options.port = 3050
+    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
+    #  options.database = "d:\\svn\\github\\MoneyTracker\\test\\MT.FDB"
+    _options.user = 'SYSDBA'
+    _options.password = 'masterkey'
     console.log "Create object dbAdapter"
-
-  send: (list, callback) ->
-    commit = @commit
-    (@prepareStatement obj, (st) ->
-      console.log st.statement
-      if (st.err)
-        error = "Can't send object to db"
-        console.log error
-        return callback({err: error})
-      else
-        commit obj, (err) ->
-          if (err)
-            error = "Commit to db failed"
-            console.log error
-            return callback({err: error})
-          else
-            return callback()
-        return) for obj in list
-    return
-
-  prepareStatement: (obj, callback) ->
-    if (true)
-      return callback({statement: 'INSERT AAA'})
-    else
-      error = 'Prepare statement error'
-      console.log error
-      return callback({err: error})
-
-  commit: (obj, callback) ->
-    if true
-      return callback()
-    else
-      error = "Commit error"
-      console.log error
-      return callback({err: error})
-
-  fbExec: () ->
-    Firebird.attach options, (err, db) ->
+    @getDictionaries (err, data) ->
       if (err)
         throw err
-      db.query 'SELECT * FROM ACCOUNT', (err, result) ->
-        if (err)
-          throw err
-        console.log result
-        db.detach()
+      _dictionaries.user = data.user
+      _dictionaries.location = data.location
+      return
 
-  fbInsert: ->
-    Firebird.attach options, (err, db) ->
+  getDictionaries: (callback) ->
+    Firebird.attach _options, (err, db) ->
+      data = {}
       if (err)
-        throw  err
-      st = [
-        "INSERT INTO EXPENSE
-        (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS)
-        VALUES (3, '15-FEB-2016', 258, 1410, 1, 257, 257, 0, 0, 1, 0, NULL, 1410, NULL)",
-        "INSERT INTO EXPENSE
-        (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS)
-        VALUES (1, '15-FEB-2016', 258, 1410, 1, 257, 257, 0, 0, 1, 0, NULL, 1410, NULL)"]
-      db.query st[0], (err, result) ->
+        console.log err
+        return callback(err)
+      db.query "SELECT ID, NAME, REMARKS FROM ORGANIZATION", (err, result) ->
         if (err)
-          throw err
-        console.log result
-        db.detach()
+          console.log err
+          return callback(err)
+        data.location = result
+        db.query "SELECT ID, NAME FROM USERMT", (err, result) ->
+          if (err)
+            console.log err
+            return callback(err)
+          data.user = result
+          db.detach()
+          return callback(null, data)
+        return
+      return
+    return
 
-  fbExpense: (sms) ->
-#    ToDo Mocking
-    ###sms = {
-      "date": "Feb 02 2016",
-      "balance": "9400.11",
-      "location": "PYATEROCHKA 3156, IVANOVO",
-      "user": "Alina",
-      "procedure": "Purchase",
-      "coast": "453.0"
-    }###
-    Firebird.attach options, (err, db) ->
-      id =
-        Expense: null
-        Item: null
-        Balance: null
+  _getChangingValues = (callback) ->
+    Firebird.attach _options, (err, db) ->
       if (err)
-        throw  err
+        console.log err
+        return callback({err: err})
       db.query "SELECT MAX(ID) FROM EXPENSE", (err, result) ->
         if (err)
-          throw err
-        id.Expense = result[0].MAX
-        console.log id.Expense
-
+          console.log err
+          return callback({err: err})
+        _dictionaries.expense = result[0].MAX + 1
         db.query "SELECT MAX(ID) FROM EXPENSEITEM", (err, result) ->
           if (err)
-            throw err
-          id.Item = result[0].MAX
-          console.log id.Item
-
+            console.log err
+            return callback({err: err})
+          _dictionaries.item = result[0].MAX + 1
+#          ToDo Mocking SELECT ONLY TKC
           db.query "SELECT BALANCE FROM ACCOUNT WHERE ID=2", (err, result) ->
             if (err)
-              throw err
-            id.Balance = parseFloat(result[0].BALANCE)
-            console.log id.Balance
+              console.log err
+              return callback({err: err})
+            _dictionaries.balance = result
+            db.detach()
+            return callback()
+          return
+        return
+      return
+    return
 
-            st = "INSERT INTO EXPENSE
-                    (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS) VALUES
-                    (?,     ?,            1,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  'autoinsert')"
-            db.query st, [id.Expense + 1, sms.date, sms.coast, sms.coast], (err, result) ->
+
+  fbExpense: (smsList, callback) ->
+    smsList =
+      [{
+        "date": "Feb 24 2016",
+        "balance": "9400.11",
+        "location": "PYATEROCHKA 3156, IVANOVO",
+        "user": "Alina",
+        "procedure": "Purchase",
+        "coast": "453.0"
+      },
+        {
+          "date": "Jan 31 2016",
+          "balance": "5323.11",
+          "location": "APTEKA MAKSAVIT, IVANOVO",
+          "user": "Alina",
+          "procedure": "Purchase",
+          "coast": "2383.0"
+        },
+        {
+          "date": "Jan 31 2016",
+          "balance": "5323.11",
+          "location": "APTEKA MAKSAVIT, IVANOVO",
+          "user": "Alina",
+          "procedure": "Purchase",
+          "coast": "2383.0"
+        },
+        {
+          "date": "Jan 27 2017",
+          "balance": "45879.06",
+          "location": "Тинькофф",
+          "user": "Maks",
+          "procedure": "Percent",
+          "coast": "304.98"
+        },
+        {
+          "date": "Jan 28 2016",
+          "balance": "10116.51",
+          "location": "OKEY, IVANOVO",
+          "user": "Alina",
+          "procedure": "Purchase",
+          "coast": "360.5"
+        }]
+    sms = smsList[0]
+    _getChangingValues (err) ->
+      if (err)
+        console.log err
+        return callback({err: err})
+      Firebird.attach _options, (err, db) ->
+        if (err)
+          throw  err
+        db.transaction Firebird.ISOLATION_READ_COMMITED, (err, transaction) ->
+          if (err)
+            console.log err
+            return callback({err: err})
+          console.log JSON.stringify _dictionaries
+          st = "INSERT INTO EXPENSE
+          (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS) VALUES
+          (?,     ?,            ?,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  'autoinsert')"
+          transaction.query st, [_dictionaries.expense, sms.date, _dictionaries.getUserId(sms.user), sms.coast, sms.coast], (err, result) ->
+            if (err)
+              console.log err
+              return callback({err: err})
+            console.log result
+            st = "INSERT INTO EXPENSEITEM
+                          (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES
+                          (?, 1, ?,          NULL,      ?,    4474,  ?,        ?,    0,  ?, ?)"
+            transaction.query st, [_dictionaries.item, sms.coast, _dictionaries.expense, sms.coast,
+              _dictionaries.getLocationId(sms.location), sms.date, 0], (err, result) ->
+              console.log '2'
               if (err)
-                throw err
-              console.log result
-
-              st = "INSERT INTO EXPENSEITEM
-                    (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES
-                    (?, ?, ?,          NULL,      ?,    4474,  ?,        12538,    0,  ?, ?)"
-              db.query st, [id.Item + 1, 1, sms.coast, id.Expense + 1, sms.coast * 1, sms.date, 1], (err, result) ->
+                console.log err
+                return callback({err: err})
+              st = "UPDATE ACCOUNT SET BALANCE=? WHERE ID=2"
+#             transaction.query st, [_dictionaries.balance - parseFloat(sms.coast)], (err, result) ->
+              transaction.query st, [200.00], (err, result) ->
                 if (err)
-                  throw err
+                  console.log err
+                  return callback({err: err})
                 console.log result
-
-                st = "UPDATE ACCOUNT SET BALANCE=? WHERE ID=2"
-                db.query st, [id.Balance - sms.coast], (err, result) ->
+                transaction.commit (err)->
                   if (err)
-                    throw err
-                  console.log result
-              ###st = "INSERT INTO EXPENSEITEM
-                  (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES
-                  (?, ?, ?,          NULL,      ?,    285,  ?,        258,    0,  ?, ?)"
-              db.query st, [id.Item + 2, 2, sms.coast, id.Expense, sms.coast * 2, sms.data, 2], (err, result) ->
-                if (err)
-                  throw err
-                console.log result###
-              db.detach()
+                    transaction.rollback()
+                    console.log err
+                    return callback({err: err})
+                  db.detach()
+                  console.log 'END'
+                  return callback()
+                return
+              return
+            return
+          return
+        return
+      return
+    return
 
 
-module.exports = db
+module.exports = dbAdapter

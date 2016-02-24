@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1ae3570-9aa8-4a99-be9f-117ca4516746" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/makss.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/makss.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyApplication/.idea/misc.xml" afterPath="$PROJECT_DIR$/../MyApplication/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.coffee" afterPath="$PROJECT_DIR$/app.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
@@ -10,9 +10,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.coffee" afterPath="$PROJECT_DIR$/model/dbAdapter.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.js" afterPath="$PROJECT_DIR$/model/dbAdapter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.js.map" afterPath="$PROJECT_DIR$/model/dbAdapter.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/smsdata.coffee" afterPath="$PROJECT_DIR$/routes/smsdata.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/smsdata.js" afterPath="$PROJECT_DIR$/routes/smsdata.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/smsdata.js.map" afterPath="$PROJECT_DIR$/routes/smsdata.js.map" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/model/smsDataAdapter.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="13" column="37" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="37" />
               <folding>
                 <element signature="e#588#1014#0" expanded="false" />
                 <element signature="e#1223#1310#0" expanded="false" />
@@ -60,9 +57,33 @@
       <file leaf-file-name="dbAdapter.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/dbAdapter.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38760808">
-              <caret line="107" column="54" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
-              <folding />
+            <state vertical-scroll-proportion="0.4293948">
+              <caret line="152" column="43" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
+              <folding>
+                <element signature="e#88#270#0" expanded="false" />
+                <element signature="e#795#1373#0" expanded="false" />
+                <element signature="e#1416#2292#0" expanded="false" />
+                <element signature="e#2352#2554#0" expanded="false" />
+                <element signature="e#2564#2780#0" expanded="false" />
+                <element signature="e#2790#3006#0" expanded="false" />
+                <element signature="e#3016#3215#0" expanded="false" />
+                <element signature="e#3225#3430#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbAdapter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/dbAdapter.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="175" column="26" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
+              <folding>
+                <marker date="1456348362275" expanded="true" signature="5793:5843" placeholder="{...}" />
+                <marker date="1456348362275" expanded="true" signature="5927:6661" placeholder="{...}" />
+                <marker date="1456348362275" expanded="true" signature="6103:6157" placeholder="{...}" />
+                <marker date="1456348362275" expanded="true" signature="6270:6641" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,8 +92,34 @@
         <entry file="file://$PROJECT_DIR$/app.coffee">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="15" selection-start-line="86" selection-start-column="15" selection-end-line="86" selection-end-column="15" />
+              <caret line="101" column="15" selection-start-line="100" selection-start-column="4" selection-end-line="101" selection-end-column="15" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="127" column="18" selection-start-line="125" selection-start-column="30" selection-end-line="127" selection-end-column="18" />
+              <folding>
+                <marker date="1456345126116" expanded="true" signature="48:2941" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="649:681" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="760:775" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="974:999" placeholder="{&quot;extended&quot;: false...}" />
+                <marker date="1456345126116" expanded="true" signature="1172:1189" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="1304:1355" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="1392:1481" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1525:1706" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1569:1700" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1634:1692" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1748:1866" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1809:1860" placeholder="{...}" />
+                <marker date="1456345126116" expanded="true" signature="1873:2657" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="2662:2749" placeholder="/*...*/" />
+                <marker date="1456345126116" expanded="true" signature="2776:2904" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,9 +160,10 @@
         <option value="$PROJECT_DIR$/routes/auth.coffee" />
         <option value="$PROJECT_DIR$/model/smsDataAdapter.coffee" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/model/dbAdapter.js" />
         <option value="$PROJECT_DIR$/routes/smsdata.coffee" />
         <option value="$PROJECT_DIR$/app.coffee" />
+        <option value="$PROJECT_DIR$/node_modules/node-firebird/lib/index.js" />
+        <option value="$PROJECT_DIR$/model/dbAdapter.js" />
         <option value="$PROJECT_DIR$/model/dbAdapter.coffee" />
       </list>
     </option>
@@ -162,8 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -180,6 +226,20 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app.coffee" />
+              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -248,6 +308,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -349,21 +411,30 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.77562326" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3227017" sideWeight="0.48125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.48333332" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.22437674" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.75900275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.49791667" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3227017" sideWeight="0.5375" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.48125" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.24099723" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3227017" sideWeight="0.51875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3227017" sideWeight="0.4625" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.49375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36022514" sideWeight="0.46614584" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36022514" sideWeight="0.44739583" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -396,41 +467,20 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="49" />
+      <option name="time" value="67" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="NodeJSConfigurationType">
+        <watch expression="dbData" />
+        <watch expression="@_catalogs" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-          <folding>
-            <marker date="1455568675039" expanded="true" signature="48:2685" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="642:674" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="746:761" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1158:1175" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1290:1341" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1378:1467" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1511:1692" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1555:1686" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1620:1678" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1734:1852" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1795:1846" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1871:2065" placeholder="{&quot;data&quot;: &quot;Tuesday Feb 02 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2102:2295" placeholder="{&quot;data&quot;: &quot;Sunday Jan 31 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2332:2508" placeholder="{&quot;data&quot;: &quot;Friday Jan 27 2017 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2545:2729" placeholder="{&quot;data&quot;: &quot;Thursday Jan 28 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2804:2853" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -467,24 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-          <folding>
-            <marker date="1455568675039" expanded="true" signature="48:2685" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="642:674" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="746:761" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1158:1175" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1290:1341" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1378:1467" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1511:1692" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1555:1686" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1620:1678" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1734:1852" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1795:1846" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1871:2065" placeholder="{&quot;data&quot;: &quot;Tuesday Feb 02 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2102:2295" placeholder="{&quot;data&quot;: &quot;Sunday Jan 31 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2332:2508" placeholder="{&quot;data&quot;: &quot;Friday Jan 27 2017 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2545:2729" placeholder="{&quot;data&quot;: &quot;Thursday Jan 28 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2804:2853" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -756,44 +788,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/acorn/dist/walk.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding>
-            <marker date="1455568675039" expanded="true" signature="48:2685" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="642:674" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="746:761" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1158:1175" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1290:1341" placeholder="/*...*/" />
-            <marker date="1455568675039" expanded="true" signature="1378:1467" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1511:1692" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1555:1686" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1620:1678" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1734:1852" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1795:1846" placeholder="{...}" />
-            <marker date="1455568675039" expanded="true" signature="1871:2065" placeholder="{&quot;data&quot;: &quot;Tuesday Feb 02 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2102:2295" placeholder="{&quot;data&quot;: &quot;Sunday Jan 31 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2332:2508" placeholder="{&quot;data&quot;: &quot;Friday Jan 27 2017 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2545:2729" placeholder="{&quot;data&quot;: &quot;Thursday Jan 28 2016 at 12:00 AM&quot;...}" />
-            <marker date="1455568675039" expanded="true" signature="2804:2853" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/node-firebird/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33285302">
-          <caret line="1232" column="17" selection-start-line="1232" selection-start-column="17" selection-end-line="1232" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/dbAdapter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="156" column="26" selection-start-line="156" selection-start-column="26" selection-end-line="156" selection-end-column="26" />
-          <folding />
+        <state vertical-scroll-proportion="2.6833334">
+          <caret line="263" column="3" selection-start-line="263" selection-start-column="3" selection-end-line="263" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -805,18 +803,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="15" selection-start-line="86" selection-start-column="15" selection-end-line="86" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/smsDataAdapter.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="13" column="37" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="37" />
           <folding>
             <element signature="e#588#1014#0" expanded="false" />
             <element signature="e#1223#1310#0" expanded="false" />
@@ -825,11 +815,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="15" selection-start-line="100" selection-start-column="4" selection-end-line="101" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="18" selection-start-line="125" selection-start-column="30" selection-end-line="127" selection-end-column="18" />
+          <folding>
+            <marker date="1456345126116" expanded="true" signature="48:2941" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="649:681" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="760:775" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="974:999" placeholder="{&quot;extended&quot;: false...}" />
+            <marker date="1456345126116" expanded="true" signature="1172:1189" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="1304:1355" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="1392:1481" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1525:1706" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1569:1700" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1634:1692" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1748:1866" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1809:1860" placeholder="{...}" />
+            <marker date="1456345126116" expanded="true" signature="1873:2657" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="2662:2749" placeholder="/*...*/" />
+            <marker date="1456345126116" expanded="true" signature="2776:2904" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/node-firebird/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7751196">
+          <caret line="3794" column="16" selection-start-line="3794" selection-start-column="16" selection-end-line="3794" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/dbAdapter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="175" column="26" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
+          <folding>
+            <marker date="1456348362275" expanded="true" signature="5793:5843" placeholder="{...}" />
+            <marker date="1456348362275" expanded="true" signature="5927:6661" placeholder="{...}" />
+            <marker date="1456348362275" expanded="true" signature="6103:6157" placeholder="{...}" />
+            <marker date="1456348362275" expanded="true" signature="6270:6641" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/dbAdapter.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38760808">
-          <caret line="107" column="54" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
-          <folding />
+        <state vertical-scroll-proportion="0.4293948">
+          <caret line="152" column="43" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
+          <folding>
+            <element signature="e#88#270#0" expanded="false" />
+            <element signature="e#795#1373#0" expanded="false" />
+            <element signature="e#1416#2292#0" expanded="false" />
+            <element signature="e#2352#2554#0" expanded="false" />
+            <element signature="e#2564#2780#0" expanded="false" />
+            <element signature="e#2790#3006#0" expanded="false" />
+            <element signature="e#3016#3215#0" expanded="false" />
+            <element signature="e#3225#3430#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
