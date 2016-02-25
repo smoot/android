@@ -15,9 +15,6 @@ router.post '/', (req, res, next) ->
       err = new Error('POST request error')
       err.status = 400
       return next(err)
-    smsData.print (err) ->
-      if (err)
-        throw new Error "print error"
     res.statusCode = 200
     return res.send()
   return

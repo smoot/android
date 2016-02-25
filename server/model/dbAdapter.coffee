@@ -1,16 +1,27 @@
 class dbAdapter
   Firebird = require('node-firebird')
+  _defaultCommodity = "Непредвиденные расходы"
+  _defaultLocation = "Прочее"
   _options = {}
 
   _dictionaries = {
     getLocationId: (locationName) ->
-#      ToDo Find ID from locationName
-      return 33
+      (if item.FULLNAME != null && (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1)
+        (if commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1
+          return {location: item.ID,
+          commodity: commodity.ID}
+        ) for commodity in _dictionaries.commodity
+        return {location: item.ID,
+        commodity: _dictionaries.defaultCommodityId}
+      ) for item in _dictionaries.location
+      console.log "Set default LOCATION: " + _dictionaries.defaultLocationId + " and COMMODITY: " + _dictionaries.defaultCommodityId
+      return {location: _dictionaries.defaultLocationId,
+      commodity: _dictionaries.defaultCommodityId}
     getUserId: (userName) ->
-      (if item.NAME.toUpperCase() == userName.toUpperCase()
+      (if item.NAME != null && (userName.toUpperCase().indexOf(item.NAME.toUpperCase()) > -1)
         return item.ID
       ) for item in _dictionaries.user
-      console.log "Set default USER:" + _dictionaries.user[0].NAME + " " +_dictionaries.user[0].ID
+      console.log "Set default USER: " + _dictionaries.user[0].NAME + " " +_dictionaries.user[0].ID
       return _dictionaries.user[0].ID
   }
 
@@ -27,6 +38,13 @@ class dbAdapter
         throw err
       _dictionaries.user = data.user
       _dictionaries.location = data.location
+      _dictionaries.commodity = data.commodity
+      (if item.NAME != null && (item.NAME.toUpperCase() == _defaultLocation.toUpperCase())
+        _dictionaries.defaultLocationId = item.ID
+      ) for item in _dictionaries.location
+      (if item.NAME != null && (item.NAME.toUpperCase() == _defaultCommodity.toUpperCase())
+        _dictionaries.defaultCommodityId = item.ID
+      ) for item in _dictionaries.commodity
       return
 
   getDictionaries: (callback) ->
@@ -35,18 +53,26 @@ class dbAdapter
       if (err)
         console.log err
         return callback(err)
-      db.query "SELECT ID, NAME, REMARKS FROM ORGANIZATION", (err, result) ->
+      db.query "SELECT ID, NAME, FULLNAME, REMARKS FROM ORGANIZATION", (err, result) ->
         if (err)
           console.log err
+          db.detach()
           return callback(err)
         data.location = result
         db.query "SELECT ID, NAME FROM USERMT", (err, result) ->
           if (err)
             console.log err
+            db.detach()
             return callback(err)
           data.user = result
-          db.detach()
-          return callback(null, data)
+          db.query "SELECT ID, NAME FROM COMMODITY", (err, result) ->
+            if (err)
+              console.log err
+              db.detach()
+              return callback(err)
+            data.commodity = result
+            db.detach()
+            return callback(null, data)
         return
       return
     return
@@ -55,7 +81,6 @@ class dbAdapter
     Firebird.attach _options, (err, db) ->
       if (err)
         console.log err
-        db.detach()
         return callback({err: err})
       db.query "SELECT MAX(ID) FROM EXPENSE", (err, result) ->
         if (err)
@@ -111,9 +136,9 @@ class dbAdapter
 
             st = "INSERT INTO EXPENSEITEM
                           (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES
-                          (?, 1, ?,          NULL,      ?,    4474,  ?,        ?,    0,  ?, ?)"
-            transaction.query st, [_dictionaries.item, sms.coast, _dictionaries.expense, sms.coast,
-              _dictionaries.getLocationId(sms.location), sms.date, 1], (err, result) ->
+                          (?, 1, ?,          NULL,      ?,    ?,  ?,        ?,    0,  ?, ?)"
+            transaction.query st, [_dictionaries.item, sms.coast, _dictionaries.expense, _dictionaries.getLocationId(sms.location).commodity, sms.coast,
+              _dictionaries.getLocationId(sms.location).location, sms.date, 1], (err, result) ->
               if (err)
                 console.log err
                 db.detach()

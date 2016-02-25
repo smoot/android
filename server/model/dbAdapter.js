@@ -3,26 +3,55 @@
   var dbAdapter;
 
   dbAdapter = (function() {
-    var Firebird, _dictionaries, _getChangingValues, _options;
+    var Firebird, _defaultCommodity, _defaultLocation, _dictionaries, _getChangingValues, _options;
 
     Firebird = require('node-firebird');
+
+    _defaultCommodity = "Непредвиденные расходы";
+
+    _defaultLocation = "Прочее";
 
     _options = {};
 
     _dictionaries = {
       getLocationId: function(locationName) {
-        return 33;
+        var commodity, i, item, j, len, len1, ref, ref1;
+        ref = _dictionaries.location;
+        for (i = 0, len = ref.length; i < len; i++) {
+          item = ref[i];
+          if (item.FULLNAME !== null && (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1)) {
+            ref1 = _dictionaries.commodity;
+            for (j = 0, len1 = ref1.length; j < len1; j++) {
+              commodity = ref1[j];
+              if (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1) {
+                return {
+                  location: item.ID,
+                  commodity: commodity.ID
+                };
+              }
+            }
+            return {
+              location: item.ID,
+              commodity: _dictionaries.defaultCommodityId
+            };
+          }
+        }
+        console.log("Set default LOCATION: " + _dictionaries.defaultLocationId + " and COMMODITY: " + _dictionaries.defaultCommodityId);
+        return {
+          location: _dictionaries.defaultLocationId,
+          commodity: _dictionaries.defaultCommodityId
+        };
       },
       getUserId: function(userName) {
         var i, item, len, ref;
         ref = _dictionaries.user;
         for (i = 0, len = ref.length; i < len; i++) {
           item = ref[i];
-          if (item.NAME.toUpperCase() === userName.toUpperCase()) {
+          if (item.NAME !== null && (userName.toUpperCase().indexOf(item.NAME.toUpperCase()) > -1)) {
             return item.ID;
           }
         }
-        console.log("Set default USER:" + _dictionaries.user[0].NAME + " " + _dictionaries.user[0].ID);
+        console.log("Set default USER: " + _dictionaries.user[0].NAME + " " + _dictionaries.user[0].ID);
         return _dictionaries.user[0].ID;
       }
     };
@@ -35,11 +64,27 @@
       _options.password = 'masterkey';
       console.log("Create object dbAdapter");
       this.getDictionaries(function(err, data) {
+        var i, item, j, len, len1, ref, ref1;
         if (err) {
           throw err;
         }
         _dictionaries.user = data.user;
         _dictionaries.location = data.location;
+        _dictionaries.commodity = data.commodity;
+        ref = _dictionaries.location;
+        for (i = 0, len = ref.length; i < len; i++) {
+          item = ref[i];
+          if (item.NAME !== null && (item.NAME.toUpperCase() === _defaultLocation.toUpperCase())) {
+            _dictionaries.defaultLocationId = item.ID;
+          }
+        }
+        ref1 = _dictionaries.commodity;
+        for (j = 0, len1 = ref1.length; j < len1; j++) {
+          item = ref1[j];
+          if (item.NAME !== null && (item.NAME.toUpperCase() === _defaultCommodity.toUpperCase())) {
+            _dictionaries.defaultCommodityId = item.ID;
+          }
+        }
       });
     }
 
@@ -51,20 +96,30 @@
           console.log(err);
           return callback(err);
         }
-        db.query("SELECT ID, NAME, REMARKS FROM ORGANIZATION", function(err, result) {
+        db.query("SELECT ID, NAME, FULLNAME, REMARKS FROM ORGANIZATION", function(err, result) {
           if (err) {
             console.log(err);
+            db.detach();
             return callback(err);
           }
           data.location = result;
           db.query("SELECT ID, NAME FROM USERMT", function(err, result) {
             if (err) {
               console.log(err);
+              db.detach();
               return callback(err);
             }
             data.user = result;
-            db.detach();
-            return callback(null, data);
+            return db.query("SELECT ID, NAME FROM COMMODITY", function(err, result) {
+              if (err) {
+                console.log(err);
+                db.detach();
+                return callback(err);
+              }
+              data.commodity = result;
+              db.detach();
+              return callback(null, data);
+            });
           });
         });
       });
@@ -74,7 +129,6 @@
       Firebird.attach(_options, function(err, db) {
         if (err) {
           console.log(err);
-          db.detach();
           return callback({
             err: err
           });
@@ -148,8 +202,8 @@
                   err: err
                 });
               }
-              st = "INSERT INTO EXPENSEITEM (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES (?, 1, ?,          NULL,      ?,    4474,  ?,        ?,    0,  ?, ?)";
-              transaction.query(st, [_dictionaries.item, sms.coast, _dictionaries.expense, sms.coast, _dictionaries.getLocationId(sms.location), sms.date, 1], function(err, result) {
+              st = "INSERT INTO EXPENSEITEM (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES (?, 1, ?,          NULL,      ?,    ?,  ?,        ?,    0,  ?, ?)";
+              transaction.query(st, [_dictionaries.item, sms.coast, _dictionaries.expense, _dictionaries.getLocationId(sms.location).commodity, sms.coast, _dictionaries.getLocationId(sms.location).location, sms.date, 1], function(err, result) {
                 if (err) {
                   console.log(err);
                   db.detach();

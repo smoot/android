@@ -22,7 +22,6 @@
           });
         }
         list.push(obj);
-        console.log("Add object to array. Total items is " + list.length);
         switch (obj.procedure) {
           case "Purchase":
             return db.addExpense(obj, function(err) {

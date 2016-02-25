@@ -23,11 +23,6 @@
         err.status = 400;
         return next(err);
       }
-      smsData.print(function(err) {
-        if (err) {
-          throw new Error("print error");
-        }
-      });
       res.statusCode = 200;
       return res.send();
     });

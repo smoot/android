@@ -11,7 +11,7 @@ class smsDataAdapter
       if (err) then return callback({err: err})
       list.push(obj)
 #      public enum enProcedure {Purchase, Input, CashOut, Code, Cashback, Percent, Info, Deny, Unknown}
-      console.log "Add object to array. Total items is " + list.length
+#      console.log "Add object to array. Total items is " + list.length
       switch obj.procedure
         when "Purchase"
           db.addExpense obj, (err) ->
