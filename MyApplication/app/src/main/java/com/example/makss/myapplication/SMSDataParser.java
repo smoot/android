@@ -52,7 +52,7 @@ public class SMSDataParser {
         int procPos, coastPos, userPos, placePos, datePos, balancePos;
         data.setProcedure(parseProcedure(tokens[0]));
         if (data.getProcedure() == enProcedure.Percent) {
-            data.setUser(enUser.Maks);                         //User
+            data.setUser(enUser.МАКС);                         //User
             data.setLocation("Тинькофф");                      //Location
             for (int i = 0; i < tokens.length; i++) {
                 if (isContain(tokens[i], "Начислено")) {
@@ -64,7 +64,7 @@ public class SMSDataParser {
             }
             result.add(data);
             data2.setProcedure(enProcedure.Cashback);
-            data2.setUser(enUser.Maks);                         //User
+            data2.setUser(enUser.МАКС);                         //User
             data2.setLocation("Тинькофф");
             data2.setDate(data.getDate());
             data2.setBalance(data.getBalance());
@@ -144,8 +144,8 @@ public class SMSDataParser {
 
     private enUser parseUser(String s) {
         Map procMap = new HashMap<String, enProcedure>();
-            procMap.put("*6296", enUser.Alina);
-            procMap.put("*5825", enUser.Maks);
+            procMap.put("*6296", enUser.АЛИНА);
+            procMap.put("*5825", enUser.МАКС);
 
 
         enUser result = (enUser) procMap.get(getElement(s.split(" "), "Karta", 1));
