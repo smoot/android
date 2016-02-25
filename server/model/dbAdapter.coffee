@@ -1,13 +1,17 @@
 class dbAdapter
   Firebird = require('node-firebird')
   _options = {}
+
   _dictionaries = {
     getLocationId: (locationName) ->
 #      ToDo Find ID from locationName
       return 33
-    getUserId: (locationName) ->
-#      ToDo Find ID from locationName
-      return 1
+    getUserId: (userName) ->
+      (if item.NAME.toUpperCase() == userName.toUpperCase()
+        return item.ID
+      ) for item in _dictionaries.user
+      console.log "Set default USER:" + _dictionaries.user[0].NAME + " " +_dictionaries.user[0].ID
+      return _dictionaries.user[0].ID
   }
 
   constructor: () ->

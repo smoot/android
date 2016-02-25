@@ -13,8 +13,17 @@
       getLocationId: function(locationName) {
         return 33;
       },
-      getUserId: function(locationName) {
-        return 1;
+      getUserId: function(userName) {
+        var i, item, len, ref;
+        ref = _dictionaries.user;
+        for (i = 0, len = ref.length; i < len; i++) {
+          item = ref[i];
+          if (item.NAME.toUpperCase() === userName.toUpperCase()) {
+            return item.ID;
+          }
+        }
+        console.log("Set default USER:" + _dictionaries.user[0].NAME + " " + _dictionaries.user[0].ID);
+        return _dictionaries.user[0].ID;
       }
     };
 
