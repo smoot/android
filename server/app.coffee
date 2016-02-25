@@ -95,11 +95,11 @@ smsData.getList (list) ->
     throw err),
   3000###
 
-setTimeout ( ->
+###setTimeout ( ->
   console.log '3000'
-  db.fbExpense null, (err) ->
+  db.addExpense null, (err) ->
     if (err)
       throw err
-  ), 2000
+  ), 2000###
 
 module.exports = app

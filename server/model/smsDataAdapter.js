@@ -5,7 +5,7 @@
   smsDataAdapter = (function() {
     var expectedFields, list;
 
-    expectedFields = ['coast', 'location', 'procedure'];
+    expectedFields = ['coast', 'location', 'procedure', 'user'];
 
     list = new Array();
 
@@ -17,15 +17,51 @@
       this.validate(obj, function(err) {
         var error;
         if (err) {
-          error = "Can't push object to array";
-          console.log(error);
           return callback({
-            err: error
+            err: err
           });
-        } else {
-          list.push(obj);
-          console.log("Add object to array. Total items is " + list.length);
-          return callback();
+        }
+        list.push(obj);
+        console.log("Add object to array. Total items is " + list.length);
+        switch (obj.procedure) {
+          case "Purchase":
+            return db.addExpense(obj, function(err) {
+              if (err) {
+                console.log(err);
+                return callback({
+                  err: error
+                });
+              }
+              return callback();
+            });
+          case "Input":
+          case "Cashback":
+          case "Percent":
+            return db.addExpense(obj, function(err) {
+              if (err) {
+                console.log(err);
+                return callback({
+                  err: error
+                });
+              }
+              return callback();
+            });
+          case "CashOut":
+            return db.addExpense(obj, function(err) {
+              if (err) {
+                console.log(err);
+                return callback({
+                  err: error
+                });
+              }
+              return callback();
+            });
+          default:
+            error = "Procedure undefined";
+            console.log(error);
+            return callback({
+              err: error
+            });
         }
       });
     };

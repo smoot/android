@@ -121,14 +121,14 @@
     3000
    */
 
-  setTimeout((function() {
-    console.log('3000');
-    return db.fbExpense(null, function(err) {
-      if (err) {
-        throw err;
-      }
-    });
-  }), 2000);
+
+  /*setTimeout ( ->
+    console.log '3000'
+    db.addExpense null, (err) ->
+      if (err)
+        throw err
+    ), 2000
+   */
 
   module.exports = app;
 

@@ -1,6 +1,6 @@
 class smsDataAdapter
   #{@date, @coast, @location, @balance, @procedure, @user, @currency}
-  expectedFields = ['coast', 'location', 'procedure']
+  expectedFields = ['coast', 'location', 'procedure', 'user']
   list = new Array()
 
   constructor: () ->
@@ -8,14 +8,35 @@ class smsDataAdapter
 
   push: (obj, callback) ->
     @validate obj, (err) ->
-      if (err)
-        error = "Can't push object to array"
-        console.log error
-        return callback({err: error})
-      else
-        list.push(obj)
-        console.log "Add object to array. Total items is " + list.length
-        callback()
+      if (err) then return callback({err: err})
+      list.push(obj)
+#      public enum enProcedure {Purchase, Input, CashOut, Code, Cashback, Percent, Info, Deny, Unknown}
+      console.log "Add object to array. Total items is " + list.length
+      switch obj.procedure
+        when "Purchase"
+          db.addExpense obj, (err) ->
+            if (err)
+              console.log err
+              return callback({err: error})
+            callback()
+#         FIXME!
+        when "Input", "Cashback", "Percent"
+          db.addExpense obj, (err) ->
+            if (err)
+              console.log err
+              return callback({err: error})
+            callback()
+#         FIXME!
+        when "CashOut"
+          db.addExpense obj, (err) ->
+            if (err)
+              console.log err
+              return callback({err: error})
+            callback()
+        else
+          error = "Procedure undefined"
+          console.log error
+          return callback({err: error})
     return
 
   validate: (obj, callback) ->

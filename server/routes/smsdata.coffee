@@ -18,9 +18,9 @@ router.post '/', (req, res, next) ->
     smsData.print (err) ->
       if (err)
         throw new Error "print error"
-    db.fbExpense req.body
     res.statusCode = 200
     return res.send()
+  return
 
 router.get '/list',  (req, res, next) ->
   smsData.getListStringify (req) ->

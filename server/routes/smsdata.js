@@ -17,7 +17,7 @@
   });
 
   router.post('/', function(req, res, next) {
-    return smsData.push(req.body, function(err) {
+    smsData.push(req.body, function(err) {
       if (err) {
         err = new Error('POST request error');
         err.status = 400;
@@ -28,7 +28,6 @@
           throw new Error("print error");
         }
       });
-      db.fbExpense(req.body);
       res.statusCode = 200;
       return res.send();
     });
