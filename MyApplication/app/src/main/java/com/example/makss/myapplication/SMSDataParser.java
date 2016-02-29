@@ -108,7 +108,7 @@ public class SMSDataParser {
             date = split[0].split("\\.");
             result = new GregorianCalendar(
                     Integer.parseInt(date[2]),
-                    Integer.parseInt(date[1]),
+                    Integer.parseInt(date[1])-1, //Вычитаем единицу, так как в Calendar Month начинается с ноля
                     Integer.parseInt(date[0])
             );
         }
