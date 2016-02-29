@@ -16,6 +16,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -28,6 +29,7 @@ public class MainActivity extends Activity {
     httpClient client;
     AsyncHttpResponseHandler handler;
     ListAdapter listAdapter;
+    Locale locale = Locale.US;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,7 @@ public class MainActivity extends Activity {
                 params.put("procedure", data.getProcedure().toString());
                 params.put("coast", Double.toString(data.getCoast()));
                 params.put("location", data.getLocation().toString());
-                params.put("date", String.format("%1$tb %1$td %1$tY", data.getDate()));
+                params.put("date", String.format(locale, "%1$tb %1$td %1$tY", data.getDate()));
                 params.put("user", data.getUser().toString());
                 params.put("balance", Double.toString(data.getBalance()));
                 client.asyncPost("/smsdata", params, handler);
