@@ -8,7 +8,7 @@ class dbAdapter
     getLocationId: (locationName) ->
       console.log locationName
       (if item.FULLNAME != null && (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1)
-        (if commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1
+        (if commodity.NAME != null && (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase())) > -1
           console.log "item.FULLNAME is" + item.FULLNAME
           console.log "item.REMARKS is" + item.REMARKS
           console.log "commodity.NAME is" + commodity.NAME

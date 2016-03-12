@@ -24,7 +24,7 @@
             ref1 = _dictionaries.commodity;
             for (j = 0, len1 = ref1.length; j < len1; j++) {
               commodity = ref1[j];
-              if (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1) {
+              if (commodity.NAME !== null && (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase())) > -1) {
                 console.log("item.FULLNAME is" + item.FULLNAME);
                 console.log("item.REMARKS is" + item.REMARKS);
                 console.log("commodity.NAME is" + commodity.NAME);
