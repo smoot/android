@@ -20,24 +20,28 @@
         ref = _dictionaries.location;
         for (i = 0, len = ref.length; i < len; i++) {
           item = ref[i];
-          if (item.FULLNAME !== null && (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1)) {
-            ref1 = _dictionaries.commodity;
-            for (j = 0, len1 = ref1.length; j < len1; j++) {
-              commodity = ref1[j];
-              if (commodity.NAME !== null && (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase())) > -1) {
-                console.log("item.FULLNAME is" + item.FULLNAME);
-                console.log("item.REMARKS is" + item.REMARKS);
-                console.log("commodity.NAME is" + commodity.NAME);
-                return {
-                  location: item.ID,
-                  commodity: commodity.ID
-                };
+          if (item.FULLNAME !== null) {
+            if (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1) {
+              ref1 = _dictionaries.commodity;
+              for (j = 0, len1 = ref1.length; j < len1; j++) {
+                commodity = ref1[j];
+                if (commodity.NAME !== null && item.REMARKS !== null) {
+                  if ((commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase())) > -1) {
+                    console.log("item.FULLNAME is" + item.FULLNAME);
+                    console.log("item.REMARKS is" + item.REMARKS);
+                    console.log("commodity.NAME is" + commodity.NAME);
+                    return {
+                      location: item.ID,
+                      commodity: commodity.ID
+                    };
+                  }
+                }
               }
+              return {
+                location: item.ID,
+                commodity: _dictionaries.defaultCommodityId
+              };
             }
-            return {
-              location: item.ID,
-              commodity: _dictionaries.defaultCommodityId
-            };
           }
         }
         console.log("Set default LOCATION: " + _dictionaries.defaultLocationId + " and COMMODITY: " + _dictionaries.defaultCommodityId);
