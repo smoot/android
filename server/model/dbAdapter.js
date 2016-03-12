@@ -16,6 +16,7 @@
     _dictionaries = {
       getLocationId: function(locationName) {
         var commodity, i, item, j, len, len1, ref, ref1;
+        console.log(locationName);
         ref = _dictionaries.location;
         for (i = 0, len = ref.length; i < len; i++) {
           item = ref[i];
@@ -24,6 +25,9 @@
             for (j = 0, len1 = ref1.length; j < len1; j++) {
               commodity = ref1[j];
               if (commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1) {
+                console.log("item.FULLNAME is" + item.FULLNAME);
+                console.log("item.REMARKS is" + item.REMARKS);
+                console.log("commodity.NAME is" + commodity.NAME);
                 return {
                   location: item.ID,
                   commodity: commodity.ID
@@ -59,7 +63,7 @@
     function dbAdapter() {
       _options.host = '127.0.0.1';
       _options.port = 3050;
-      _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB";
+      _options.database = "D:\\sync\\MoneyTracker\\MT.FDB";
       _options.user = 'SYSDBA';
       _options.password = 'masterkey';
       console.log("Create object dbAdapter");
@@ -133,7 +137,7 @@
             err: err
           });
         }
-        db.query("SELECT MAX(ID) FROM EXPENSE", function(err, result) {
+        db.query("SELECT NEXT VALUE FOR IDGEN FROM RDB$DATABASE;", function(err, result) {
           if (err) {
             console.log(err);
             db.detach();
@@ -141,7 +145,8 @@
               err: err
             });
           }
-          _dictionaries.expense = result[0].MAX + 1;
+          _dictionaries.expense = result[0].GEN_ID;
+          console.log("EXPENSE ID is " + result[0].GEN_ID);
           db.query("SELECT MAX(ID) FROM EXPENSEITEM", function(err, result) {
             if (err) {
               console.log(err);
@@ -193,8 +198,8 @@
                 err: err
               });
             }
-            st = "INSERT INTO EXPENSE (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS) VALUES (?,     ?,            ?,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  'autoinsert')";
-            transaction.query(st, [_dictionaries.expense, sms.date, _dictionaries.getUserId(sms.user), sms.coast, sms.coast], function(err, result) {
+            st = "INSERT INTO EXPENSE (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS) VALUES (?,     ?,            ?,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  ?)";
+            transaction.query(st, [_dictionaries.expense, sms.date, _dictionaries.getUserId(sms.user), sms.coast, sms.coast, 'autoinsert ' + sms.location], function(err, result) {
               if (err) {
                 console.log(err);
                 db.detach();

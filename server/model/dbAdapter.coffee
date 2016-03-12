@@ -6,8 +6,12 @@ class dbAdapter
 
   _dictionaries = {
     getLocationId: (locationName) ->
+      console.log locationName
       (if item.FULLNAME != null && (locationName.toUpperCase().indexOf(item.FULLNAME.toUpperCase()) > -1)
         (if commodity.NAME.toUpperCase().indexOf(item.REMARKS.toUpperCase()) > -1
+          console.log "item.FULLNAME is" + item.FULLNAME
+          console.log "item.REMARKS is" + item.REMARKS
+          console.log "commodity.NAME is" + commodity.NAME
           return {location: item.ID,
           commodity: commodity.ID}
         ) for commodity in _dictionaries.commodity
@@ -28,8 +32,8 @@ class dbAdapter
   constructor: () ->
     _options.host = '127.0.0.1'
     _options.port = 3050
-    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
-    #  options.database = "d:\\svn\\github\\MoneyTracker\\test\\MT.FDB"
+#    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
+    _options.database = "D:\\sync\\MoneyTracker\\MT.FDB"
     _options.user = 'SYSDBA'
     _options.password = 'masterkey'
     console.log "Create object dbAdapter"
@@ -82,12 +86,13 @@ class dbAdapter
       if (err)
         console.log err
         return callback({err: err})
-      db.query "SELECT MAX(ID) FROM EXPENSE", (err, result) ->
+      db.query "SELECT NEXT VALUE FOR IDGEN FROM RDB$DATABASE;", (err, result) ->
         if (err)
           console.log err
           db.detach()
           return callback({err: err})
-        _dictionaries.expense = result[0].MAX + 1
+        _dictionaries.expense = result[0].GEN_ID
+        console.log "EXPENSE ID is " + result[0].GEN_ID
         db.query "SELECT MAX(ID) FROM EXPENSEITEM", (err, result) ->
           if (err)
             console.log err
@@ -126,9 +131,9 @@ class dbAdapter
 
           st = "INSERT INTO EXPENSE
           (ID, TRANSFERDATE, USERMT, TOTALITEMS, OBJVERSION, ACCOUNT, MONEYTYPE, DISC, DISCPERCENT, DISCTYPE, DISCINPRICE, COMMONTRADEPLACE, TOTAL, REMARKS) VALUES
-          (?,     ?,            ?,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  'autoinsert')"
+          (?,     ?,            ?,      ?,         1,          2,      1,      0,      0,            1,        0,          NULL,           ?,  ?)"
           transaction.query st, [_dictionaries.expense, sms.date, _dictionaries.getUserId(sms.user),
-            sms.coast, sms.coast], (err, result) ->
+            sms.coast, sms.coast, 'autoinsert ' + sms.location], (err, result) ->
             if (err)
               console.log err
               db.detach()
