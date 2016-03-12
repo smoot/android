@@ -40,7 +40,7 @@ class dbAdapter
   constructor: () ->
     _options.host = '127.0.0.1'
     _options.port = 3050
-    #    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
+#    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
     _options.database = "D:\\sync\\MoneyTracker\\MT.FDB"
     _options.user = 'SYSDBA'
     _options.password = 'masterkey'
@@ -94,6 +94,7 @@ class dbAdapter
       if (err)
         console.log err
         return callback({err: err})
+      #     Получаем значения генератора для таблицы EXPENSE
       db.query "SELECT NEXT VALUE FOR IDGEN FROM RDB$DATABASE;", (err, result) ->
         if (err)
           console.log err
@@ -158,8 +159,14 @@ class dbAdapter
                 db.detach()
                 return callback({err: err})
 
+              balance = {
+                old: _dictionaries.balance
+                coast: parseFloat(sms.coast)
+                new: null
+              }
+              balance.new = balance.old - balance.coast
               st = "UPDATE ACCOUNT SET BALANCE=? WHERE ID=2"
-              transaction.query st, [_dictionaries.balance - parseFloat(sms.coast)], (err, result) ->
+              transaction.query st, [balance.new], (err, result) ->
                 if (err)
                   console.log err
                   db.detach()
@@ -173,7 +180,7 @@ class dbAdapter
                   db.detach()
                   console.log 'Send ' + JSON.stringify(sms) + ' to DB'
                   console.log 'Balance is ' + (_dictionaries.balance - parseFloat(sms.coast))
-                  return callback()
+                  return callback(null, {balance: balance})
                 return
               return
             return

@@ -14,25 +14,25 @@ class smsDataAdapter
 #      console.log "Add object to array. Total items is " + list.length
       switch obj.procedure
         when "Purchase"
-          db.addExpense obj, (err) ->
+          db.addExpense obj, (err, balance) ->
             if (err)
               console.log err
               return callback({err: error})
-            callback()
+            callback(null, balance)
 #         FIXME!
         when "Input", "Cashback", "Percent"
-          db.addExpense obj, (err) ->
+          db.addExpense obj, (err, balance) ->
             if (err)
               console.log err
               return callback({err: error})
-            callback()
+            callback(null, balance)
 #         FIXME!
         when "CashOut"
-          db.addExpense obj, (err) ->
+          db.addExpense obj, (err, balance) ->
             if (err)
               console.log err
               return callback({err: error})
-            callback()
+            callback(null, balance)
         else
           error = "Procedure undefined"
           console.log error

@@ -213,6 +213,7 @@
               }
               st = "INSERT INTO EXPENSEITEM (ID, QTY, PRICE, REMARKS, EXPENSE, COMM, TOTAL, TRADEPLACE, DISC, TRANSFERDATE, IDX) VALUES (?, 1, ?,          NULL,      ?,    ?,  ?,        ?,    0,  ?, ?)";
               transaction.query(st, [_dictionaries.item, sms.coast, _dictionaries.expense, _dictionaries.getLocationId(sms.location).commodity, sms.coast, _dictionaries.getLocationId(sms.location).location, sms.date, 1], function(err, result) {
+                var balance;
                 if (err) {
                   console.log(err);
                   db.detach();
@@ -220,8 +221,14 @@
                     err: err
                   });
                 }
+                balance = {
+                  old: _dictionaries.balance,
+                  coast: parseFloat(sms.coast),
+                  "new": null
+                };
+                balance["new"] = balance.old - balance.coast;
                 st = "UPDATE ACCOUNT SET BALANCE=? WHERE ID=2";
-                transaction.query(st, [_dictionaries.balance - parseFloat(sms.coast)], function(err, result) {
+                transaction.query(st, [balance["new"]], function(err, result) {
                   if (err) {
                     console.log(err);
                     db.detach();
@@ -241,7 +248,9 @@
                     db.detach();
                     console.log('Send ' + JSON.stringify(sms) + ' to DB');
                     console.log('Balance is ' + (_dictionaries.balance - parseFloat(sms.coast)));
-                    return callback();
+                    return callback(null, {
+                      balance: balance
+                    });
                   });
                 });
               });

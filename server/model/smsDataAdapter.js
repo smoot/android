@@ -24,36 +24,36 @@
         list.push(obj);
         switch (obj.procedure) {
           case "Purchase":
-            return db.addExpense(obj, function(err) {
+            return db.addExpense(obj, function(err, balance) {
               if (err) {
                 console.log(err);
                 return callback({
                   err: error
                 });
               }
-              return callback();
+              return callback(null, balance);
             });
           case "Input":
           case "Cashback":
           case "Percent":
-            return db.addExpense(obj, function(err) {
+            return db.addExpense(obj, function(err, balance) {
               if (err) {
                 console.log(err);
                 return callback({
                   err: error
                 });
               }
-              return callback();
+              return callback(null, balance);
             });
           case "CashOut":
-            return db.addExpense(obj, function(err) {
+            return db.addExpense(obj, function(err, balance) {
               if (err) {
                 console.log(err);
                 return callback({
                   err: error
                 });
               }
-              return callback();
+              return callback(null, balance);
             });
           default:
             error = "Procedure undefined";

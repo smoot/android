@@ -10,11 +10,12 @@ router.post '/*', (req, res, next) ->
   return next()
 
 router.post '/', (req, res, next) ->
-  smsData.push req.body, (err) ->
+  smsData.push req.body, (err, balance) ->
     if (err)
       err = new Error('POST request error')
       err.status = 400
       return next(err)
+    res.write(JSON.stringify(balance));
     res.statusCode = 200
     return res.send()
   return

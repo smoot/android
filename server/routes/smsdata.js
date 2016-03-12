@@ -17,12 +17,13 @@
   });
 
   router.post('/', function(req, res, next) {
-    smsData.push(req.body, function(err) {
+    smsData.push(req.body, function(err, balance) {
       if (err) {
         err = new Error('POST request error');
         err.status = 400;
         return next(err);
       }
+      res.write(JSON.stringify(balance));
       res.statusCode = 200;
       return res.send();
     });

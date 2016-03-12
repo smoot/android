@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -53,7 +56,9 @@ public class MainActivity extends Activity {
         handler = new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
+                String aaa = new String(responseBody);;
+                Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode) +
+                        " \n Balance is: " + aaa, Toast.LENGTH_SHORT).show();
             }
 
             @Override
