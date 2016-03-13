@@ -10,25 +10,25 @@ import java.util.Map;
  * Created by makss on 22.01.2016.
  */
 public class SMSDataParser {
-    private ArrayList<SMSData> smsDataList;
+    private ArrayList<ListItemData> listItemDataList;
     private ArrayList<SMSDataParse> smsDataParseList;
 
-    public SMSDataParser(ArrayList<SMSData> smsDataList) {
-        this.smsDataList = smsDataList;
+    public SMSDataParser(ArrayList<ListItemData> listItemDataList) {
+        this.listItemDataList = listItemDataList;
     }
 
     public ArrayList<SMSDataParse> GetSMSDataParse() {
         smsDataParseList = new ArrayList<>();
         smsDataParseList.clear();
 
-        if (smsDataList != null) for (SMSData item : smsDataList)
+        if (listItemDataList != null) for (ListItemData item : listItemDataList)
             smsDataParseList.addAll(parse(item));
         return smsDataParseList;
 
     }
 
-    private ArrayList<SMSDataParse> parse(SMSData input) {
-        String[] tokens = input.getBody().split("\\. ");
+    private ArrayList<SMSDataParse> parse(ListItemData input) {
+        String[] tokens = input.getString(1).split("\\. ");
         SMSDataParse data = new SMSDataParse();
         SMSDataParse data2 = new SMSDataParse();
         ArrayList<SMSDataParse> result = new ArrayList<>();

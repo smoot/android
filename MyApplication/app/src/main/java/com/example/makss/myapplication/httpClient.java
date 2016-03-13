@@ -20,8 +20,8 @@ public class httpClient {
 
     public httpClient() {
         this.client = new AsyncHttpClient();
-//        this.host = "192.168.56.1";
-        this.host = "109.60.147.185";
+        this.host = "192.168.56.1";
+//        this.host = "109.60.147.185";
         this.port = "3000";
         this.url = "http://" + host + ":" + port;
         client.addHeader("Content-Type", "application/json");
@@ -40,6 +40,21 @@ public class httpClient {
             e1.printStackTrace();
         }
         client.post(url + path, params, handler);
+
     }
 
+    public void asyncGet(String path, RequestParams params, AsyncHttpResponseHandler handler){
+        if (params!=null) {
+            params.setUseJsonStreamer(true);
+            StringEntity se = null;
+            try {
+                se = new StringEntity(params.toString());
+                se.setContentType("application/json");
+            } catch (UnsupportedEncodingException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        client.get(url + path, params, handler);
+    }
 }

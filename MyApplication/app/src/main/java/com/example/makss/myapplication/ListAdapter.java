@@ -11,12 +11,18 @@ import android.widget.TextView;
 public class ListAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
-    private ArrayList<SMSData> objects;
+    private ArrayList<ListItemData> objects;
     private ArrayList<SMSDataParse> parse = new ArrayList<SMSDataParse>();
 
-    ListAdapter(Context context, ArrayList<SMSData> SMSList) {
+    ListAdapter(Context context, ArrayList<ListItemData> SMSList) {
         ctx = context;
         objects = SMSList;
+        lInflater = (LayoutInflater) ctx
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    ListAdapter(Context context, ArrayList<httpClient> clients, boolean f) {
+        ctx = context;
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -48,12 +54,12 @@ public class ListAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.item, parent, false);
         }
 
-        SMSData p = getSMSData(position);
+        ListItemData p = getSMSData(position);
 
         // заполняем View в пункте списка данными из товаров: наименование, цена
         // и картинка
-        ((TextView) view.findViewById(R.id.smsNumberText)).setText(p.getNumber());
-        ((TextView) view.findViewById(R.id.smsBodyText)).setText(p.getBody());
+        ((TextView) view.findViewById(R.id.smsNumberText)).setText(p.getString(0));
+        ((TextView) view.findViewById(R.id.smsBodyText)).setText(p.getString(1));
 //        ((ImageView) view.findViewById(R.id.ivImage)).setImageResource(p.image);
 
        /* CheckBox cbBuy = (CheckBox) view.findViewById(R.id.cbBox);
@@ -67,8 +73,8 @@ public class ListAdapter extends BaseAdapter {
     }
 
     // товар по позиции
-    SMSData getSMSData(int position) {
-        return ((SMSData) getItem(position));
+    ListItemData getSMSData(int position) {
+        return ((ListItemData) getItem(position));
     }
 
     SMSDataParse getSMSDataParseItem(int position) {
@@ -81,9 +87,9 @@ public class ListAdapter extends BaseAdapter {
 
 }
     /*// содержимое корзины
-    ArrayList<SMSData> getBox() {
-        ArrayList<SMSData> box = new ArrayList<SMSData>();
-        for (SMSData p : objects) {
+    ArrayList<ListItemData> getBox() {
+        ArrayList<ListItemData> box = new ArrayList<ListItemData>();
+        for (ListItemData p : objects) {
             // если в корзине
             if (p.box)
                 box.add(p);
@@ -110,16 +116,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.makss.myapplication.SMSData;
+import com.example.makss.myapplication.ListItemData;
 
-public class ListAdapter extends ArrayAdapter<SMSData> {
+public class ListAdapter extends ArrayAdapter<ListItemData> {
 
     // List context
     private final Context context;
     // List values
-    private final List<SMSData> smsList;
+    private final List<ListItemData> smsList;
 
-    public ListAdapter(Context context, List<SMSData> smsList) {
+    public ListAdapter(Context context, List<ListItemData> smsList) {
         super(context, R.layout.activity_main, smsList);
         this.context = context;
         this.smsList = smsList;
@@ -132,7 +138,7 @@ public class ListAdapter extends ArrayAdapter<SMSData> {
         View rowView = inflater.inflate(R.layout.activity_main, parent, true);
 
         TextView senderNumber = (TextView) rowView.findViewById(R.id.smsNumberText);
-        senderNumber.setText(smsList.get(position).getNumber());
+        senderNumber.setText(smsList.get(position).getString());
 
         TextView BodyText = (TextView) rowView.findViewById(R.id.smsBodyText);
         BodyText.setText(smsList.get(position).getBody());

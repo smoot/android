@@ -20,9 +20,24 @@ router.post '/', (req, res, next) ->
     return res.send()
   return
 
-router.get '/list',  (req, res, next) ->
+router.get '/list', (req, res, next) ->
   smsData.getListStringify (req) ->
     res.render('index', {title: 'Express', body: req})
   return
+
+#FIXME !!
+router.get '/balance', (req, res, next) ->
+  ###smsData.push req.body, (err, balance) ->
+    if (err)
+      err = new Error('POST request error')
+      err.status = 400
+      return next(err)###
+  balance = {
+    name: "ТКС"
+    balance: 5558
+  }
+  res.write(JSON.stringify(balance));
+  res.statusCode = 200
+  return res.send()
 
 module.exports = router

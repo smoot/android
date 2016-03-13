@@ -13,22 +13,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inbox"
-            android:id="@+id/viewInbox"
-            android:onClick="onInboxClick"
-            android:background="@android:color/background_light" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sent"
-            android:id="@+id/viewSent"
-            android:onClick="onSentClick"
-            android:autoText="true"
-            android:background="@android:color/background_light" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Tinkoff"
             android:id="@+id/viewTinkoff"
             android:onClick="onTinkoffClick"
@@ -40,6 +24,14 @@
             android:text="Parse"
             android:id="@+id/viewParse"
             android:onClick="onParseClick"
+            android:autoText="true"
+            android:background="@android:color/background_light" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance"
+            android:id="@+id/viewBalance"
+            android:onClick="onBalanceClick"
             android:autoText="true"
             android:background="@android:color/background_light" />
 

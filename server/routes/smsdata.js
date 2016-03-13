@@ -38,6 +38,24 @@
     });
   });
 
+  router.get('/balance', function(req, res, next) {
+
+    /*smsData.push req.body, (err, balance) ->
+      if (err)
+        err = new Error('POST request error')
+        err.status = 400
+        return next(err)
+     */
+    var balance;
+    balance = {
+      name: "ТКС",
+      balance: 5558
+    };
+    res.write(JSON.stringify(balance));
+    res.statusCode = 200;
+    return res.send();
+  });
+
   module.exports = router;
 
 }).call(this);
