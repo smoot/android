@@ -67,7 +67,7 @@
     function dbAdapter() {
       _options.host = '127.0.0.1';
       _options.port = 3050;
-      _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB";
+      _options.database = "D:\\sync\\MoneyTracker\\MT.FDB";
       _options.user = 'SYSDBA';
       _options.password = 'masterkey';
       console.log("Create object dbAdapter");
@@ -256,6 +256,27 @@
               });
             });
           });
+        });
+      });
+    };
+
+    dbAdapter.prototype.getBalance = function(callback) {
+      Firebird.attach(_options, function(err, db) {
+        var balance;
+        balance = {};
+        if (err) {
+          console.log(err);
+          return callback(err);
+        }
+        db.query("SELECT NAME, BALANCE FROM ACCOUNT", function(err, result) {
+          if (err) {
+            console.log(err);
+            db.detach();
+            return callback(err);
+          }
+          balance = result;
+          db.detach();
+          return callback(null, balance);
         });
       });
     };

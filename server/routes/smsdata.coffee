@@ -27,17 +27,21 @@ router.get '/list', (req, res, next) ->
 
 #FIXME !!
 router.get '/balance', (req, res, next) ->
-  ###smsData.push req.body, (err, balance) ->
+  db.getBalance (err, balance) ->
     if (err)
-      err = new Error('POST request error')
+      err = new Error('GET request error')
       err.status = 400
-      return next(err)###
-  balance = {
-    name: "ТКС"
-    balance: 5558
-  }
-  res.write(JSON.stringify(balance));
-  res.statusCode = 200
-  return res.send()
+      return next(err)
+    balance1 = [
+      name: "ТКС"
+      balance: 5558
+    ,
+      name: "Кошелек МАКС"
+      balance: 2456
+    ]
+    res.write(JSON.stringify(balance));
+    res.statusCode = 200
+    return res.send()
+  return
 
 module.exports = router

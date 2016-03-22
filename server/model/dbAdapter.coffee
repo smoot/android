@@ -40,8 +40,8 @@ class dbAdapter
   constructor: () ->
     _options.host = '127.0.0.1'
     _options.port = 3050
-    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
-#    _options.database = "D:\\sync\\MoneyTracker\\MT.FDB"
+#    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
+    _options.database = "D:\\sync\\MoneyTracker\\MT.FDB"
     _options.user = 'SYSDBA'
     _options.password = 'masterkey'
     console.log "Create object dbAdapter"
@@ -186,6 +186,22 @@ class dbAdapter
             return
           return
         return
+      return
+    return
+  getBalance: (callback) ->
+    Firebird.attach _options, (err, db) ->
+      balance = {}
+      if (err)
+        console.log err
+        return callback(err)
+      db.query "SELECT NAME, BALANCE FROM ACCOUNT", (err, result) ->
+        if (err)
+          console.log err
+          db.detach()
+          return callback(err)
+        balance = result
+        db.detach()
+        return callback null, balance
       return
     return
 

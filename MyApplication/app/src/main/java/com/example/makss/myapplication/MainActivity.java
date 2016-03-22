@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,11 +17,17 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -71,16 +79,11 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String aaa = new String(responseBody);
-                JSONObject jsonResult = null;
-                try {
-                    jsonResult = new JSONObject(aaa);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                fillData(parseBalance(aaa));
 
-//                ToDo Balance to View!!!
-                Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode) +
-                        " \n Balance is: " + aaa, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(MainActivity.this, "Request success. Status code is " + String.valueOf(statusCode) +
+                        " \n Balance is: " + aaa, Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
@@ -157,7 +160,7 @@ public class MainActivity extends Activity {
 
     }
 
-   void getBalanceList(){
+    void getBalanceList() {
 
         client.asyncGet("/smsdata/balance", null, handler1);
 
@@ -211,6 +214,31 @@ public class MainActivity extends Activity {
         parser = new SMSDataParser(l);
         ArrayList<SMSDataParse> list = parser.GetSMSDataParse();
         return list;
+    }
+
+    ArrayList<ListItemData> parseBalance(String jsonString) {
+        ArrayList<ListItemData> l = new ArrayList<>();
+        JSONArray jsonArray = null;
+
+        try {
+            jsonArray = new JSONArray(jsonString);
+            String name;
+            Integer balance;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject row = jsonArray.getJSONObject(i);
+                name = row.getString("NAME");
+                balance = row.getInt("BALANCE");
+
+                ListItemData itemData = new ListItemData(2);
+                itemData.setString(1, name);
+                itemData.setString(0, balance.toString());
+                l.add(itemData);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return l;
     }
 
 }

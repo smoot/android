@@ -39,21 +39,26 @@
   });
 
   router.get('/balance', function(req, res, next) {
-
-    /*smsData.push req.body, (err, balance) ->
-      if (err)
-        err = new Error('POST request error')
-        err.status = 400
-        return next(err)
-     */
-    var balance;
-    balance = {
-      name: "ТКС",
-      balance: 5558
-    };
-    res.write(JSON.stringify(balance));
-    res.statusCode = 200;
-    return res.send();
+    db.getBalance(function(err, balance) {
+      var balance1;
+      if (err) {
+        err = new Error('GET request error');
+        err.status = 400;
+        return next(err);
+      }
+      balance1 = [
+        {
+          name: "ТКС",
+          balance: 5558
+        }, {
+          name: "Кошелек МАКС",
+          balance: 2456
+        }
+      ];
+      res.write(JSON.stringify(balance));
+      res.statusCode = 200;
+      return res.send();
+    });
   });
 
   module.exports = router;
