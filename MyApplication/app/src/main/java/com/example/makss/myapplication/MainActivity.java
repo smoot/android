@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,20 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends Activity {
 
     ListView lvMain;
-    Button viewBalance, viewTinkoff, viewParse;
     TextView quantity;
     SMSDataParser parser;
     httpClient client;
@@ -46,18 +38,21 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // создаем адаптер
-
-
         // настраиваем список
         lvMain = (ListView) findViewById(R.id.list);
 
         //Кнопки
-        viewBalance = (Button) findViewById(R.id.viewBalance);
-        viewTinkoff = (Button) findViewById(R.id.viewTinkoff);
-        viewParse = (Button) findViewById(R.id.viewParse);
+        createButtons(new int[]{
+                        R.id.btBalance,
+                        R.id.btTinkoff,
+                        R.id.btParse
+                }
+        );
+
+        //Количество элементов
         quantity = (TextView) findViewById(R.id.quantity);
 
+        //Обработчик запросов к серверу
         client = new httpClient();
 
         handler = new AsyncHttpResponseHandler() {
@@ -111,27 +106,34 @@ public class MainActivity extends Activity {
     }
 
 
-    public void onBalanceClick(View view) {
-        getBalanceList();
-//        fillData(getSMSList("sent", null)); //FIXME
-        viewParse.setBackgroundColor(0xffffffff);
-        viewBalance.setBackgroundColor(Color.BLUE);
-        viewTinkoff.setBackgroundColor(0xffffffff);
+    public void createButtons(int[] btIdArray) {
+        for (int i = 0; i < btIdArray.length; i++) {
+            findViewById(btIdArray[i]).setOnClickListener(radioButtonsClickListener);
+        }
     }
 
-    public void onTinkoffClick(View view) {
-        fillData(getSMSList("inbox", "address LIKE '%Tinko%'"));
-        viewParse.setBackgroundColor(0xffffffff);
-        viewBalance.setBackgroundColor(0xffffffff);
-        viewTinkoff.setBackgroundColor(Color.BLUE);
-    }
+    private View.OnClickListener radioButtonsClickListener = new View.OnClickListener() {
 
-    public void onParseClick(View view) {
-        fillDataParse(parse(getSMSList("inbox", "address LIKE '%Tinko%'")));
-        viewBalance.setBackgroundColor(0xffffffff);
-        viewTinkoff.setBackgroundColor(0xffffffff);
-        viewParse.setBackgroundColor(Color.BLUE);
-    }
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btBalance:
+                    getBalanceList();
+                    break;
+                case R.id.btTinkoff:
+                    fillData(getSMSList("inbox", "address LIKE '%Tinko%'"));
+                    break;
+                case R.id.btParse:
+                    fillDataParse(parse(getSMSList("inbox", "address LIKE '%Tinko%'")));
+                    break;
+                case View.NO_ID:
+                default:
+                    Toast.makeText(getApplicationContext(), "Error: unknown button", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
 
     void fillData(ArrayList<ListItemData> l) {
         listAdapter = new ListAdapter(this, l);

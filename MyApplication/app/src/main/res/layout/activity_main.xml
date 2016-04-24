@@ -5,47 +5,62 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false">
+        android:layout_width="fill_parent"
+        android:layout_height="37dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tinkoff"
-            android:id="@+id/viewTinkoff"
-            android:onClick="onTinkoffClick"
-            android:autoText="true"
-            android:background="@android:color/background_light" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Parse"
-            android:id="@+id/viewParse"
-            android:onClick="onParseClick"
-            android:autoText="true"
-            android:background="@android:color/background_light" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Balance"
-            android:id="@+id/viewBalance"
-            android:onClick="onBalanceClick"
-            android:autoText="true"
-            android:background="@android:color/background_light" />
+        <RadioGroup
+            android:layout_width="242dp"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:id="@+id/mainRadioGroup"
+            android:weightSum="1">
+            <!--FIXME: Set static Width-->
+            <RadioButton
+                android:id="@+id/btTinkoff"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:autoText="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radiobuttonbackground"
+                android:text="Tinkoff"
+                android:checked="false"
+                android:textAlignment="center" />
+
+            <RadioButton
+                android:id="@+id/btParse"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:autoText="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radiobuttonbackground"
+                android:text="Parse"
+                android:layout_weight="0.38"
+                android:textAlignment="center" />
+
+            <RadioButton
+                android:id="@+id/btBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:autoText="true"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radiobuttonbackground"
+                android:text="Balance"
+                android:layout_weight="0.50"
+                android:textAlignment="center" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="quantity">
-        </TextView>
+            android:text="quantity"></TextView>
+
     </LinearLayout>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
