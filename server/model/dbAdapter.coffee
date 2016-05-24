@@ -40,7 +40,7 @@ class dbAdapter
   constructor: () ->
     _options.host = '127.0.0.1'
     _options.port = 3050
-    _options.database = "/home/user/temp/MT.FDB"
+    _options.database = "/home/user/test/MT.FDB"
 #    _options.database = "d:\\svn\\github\\MoneyTracker\\MT.FDB"
 #    _options.database = "D:\\sync\\MoneyTracker\\MT.FDB"
     _options.user = 'SYSDBA'

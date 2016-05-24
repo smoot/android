@@ -10,10 +10,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/dimens.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../MyApplication/app/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.coffee" afterPath="$PROJECT_DIR$/model/dbAdapter.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.js" afterPath="$PROJECT_DIR$/model/dbAdapter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/dbAdapter.js.map" afterPath="$PROJECT_DIR$/model/dbAdapter.js.map" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,8 +85,8 @@
       <file leaf-file-name="dbAdapter.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/dbAdapter.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45132744">
-              <caret line="47" column="40" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.34386852">
+              <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
               <folding>
                 <element signature="e#211#1255#0" expanded="false" />
                 <element signature="e#1291#1579#0" expanded="false" />
@@ -108,12 +106,12 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="280" column="6" selection-start-line="280" selection-start-column="6" selection-end-line="280" selection-end-column="6" />
               <folding>
-                <marker date="1464116381788" expanded="true" signature="1624:1634" placeholder="{...}" />
-                <marker date="1464116381788" expanded="true" signature="2718:3557" placeholder="{...}" />
-                <marker date="1464116381788" expanded="true" signature="3044:3247" placeholder="{...}" />
-                <marker date="1464116381788" expanded="true" signature="3169:3237" placeholder="{...}" />
-                <marker date="1464116381788" expanded="true" signature="3343:3549" placeholder="{...}" />
-                <marker date="1464116381788" expanded="true" signature="3470:3539" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="1624:1634" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="2718:3557" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="3044:3247" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="3169:3237" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="3343:3549" placeholder="{...}" />
+                <marker date="1464118287163" expanded="true" signature="3470:3539" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -420,7 +418,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14895834" sideWeight="0.6813187" order="0" side_tool="false" content_ui="combo" />
@@ -801,12 +799,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="280" column="6" selection-start-line="280" selection-start-column="6" selection-end-line="280" selection-end-column="6" />
           <folding>
-            <marker date="1464116381788" expanded="true" signature="1624:1634" placeholder="{...}" />
-            <marker date="1464116381788" expanded="true" signature="2718:3557" placeholder="{...}" />
-            <marker date="1464116381788" expanded="true" signature="3044:3247" placeholder="{...}" />
-            <marker date="1464116381788" expanded="true" signature="3169:3237" placeholder="{...}" />
-            <marker date="1464116381788" expanded="true" signature="3343:3549" placeholder="{...}" />
-            <marker date="1464116381788" expanded="true" signature="3470:3539" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="1624:1634" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="2718:3557" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="3044:3247" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="3169:3237" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="3343:3549" placeholder="{...}" />
+            <marker date="1464118287163" expanded="true" signature="3470:3539" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -853,8 +851,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/dbAdapter.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45132744">
-          <caret line="47" column="40" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.34386852">
+          <caret line="42" column="40" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
           <folding>
             <element signature="e#211#1255#0" expanded="false" />
             <element signature="e#1291#1579#0" expanded="false" />
