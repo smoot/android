@@ -5,7 +5,7 @@
   dbAdapter = (function() {
     var Firebird, _defaultCommodity, _defaultLocation, _dictionaries, _getChangingValues, _options;
 
-    Firebird = require('node-firebird');
+    Firebird = require('../node-firebird');
 
     _defaultCommodity = "Непредвиденные расходы";
 
