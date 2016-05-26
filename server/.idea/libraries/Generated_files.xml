@@ -3,10 +3,12 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/routes/auth.js" />
+        <item url="file://$PROJECT_DIR$/bin/changePermission.js" />
         <item url="file://$PROJECT_DIR$/routes/index.js" />
         <item url="file://$PROJECT_DIR$/routes/users.js" />
         <item url="file://$PROJECT_DIR$/app.js" />
         <item url="file://$PROJECT_DIR$/model/dbAdapter.js" />
+        <item url="file://$PROJECT_DIR$/model/firebirdInterlayer.js" />
         <item url="file://$PROJECT_DIR$/routes/smsdata.js" />
         <item url="file://$PROJECT_DIR$/model/smsDataAdapter.js" />
         <item url="file://$PROJECT_DIR$/bin/www.js" />
@@ -14,11 +16,14 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/model/init.js" />
+      <root url="file://$PROJECT_DIR$/bin/changePermission.js" />
       <root url="file://$PROJECT_DIR$/routes/auth.js" />
+      <root url="file://$PROJECT_DIR$/bin/changePermission.js" />
       <root url="file://$PROJECT_DIR$/routes/index.js" />
       <root url="file://$PROJECT_DIR$/routes/users.js" />
       <root url="file://$PROJECT_DIR$/app.js" />
       <root url="file://$PROJECT_DIR$/model/dbAdapter.js" />
+      <root url="file://$PROJECT_DIR$/model/firebirdInterlayer.js" />
       <root url="file://$PROJECT_DIR$/routes/smsdata.js" />
       <root url="file://$PROJECT_DIR$/model/smsDataAdapter.js" />
       <root url="file://$PROJECT_DIR$/bin/www.js" />
