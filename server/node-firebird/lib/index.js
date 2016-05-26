@@ -1585,7 +1585,7 @@ exports.attach = function(options, callback) {
         }
 
         //Изменяем права доступа к файлу перед подключением
-		fs.chmod(options.database, 666);
+		fs.chmod(options.database, 0666);
 
         cnx.connect(options.database || options.filename, function(err) {
             if (err) {
