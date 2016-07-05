@@ -3,6 +3,4 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="radioButtonChecked">#9faae7</color>
-    <color name="radioButtonUnChecked">#e27676</color>
 </resources>
