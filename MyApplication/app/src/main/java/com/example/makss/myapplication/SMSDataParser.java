@@ -146,11 +146,12 @@ public class SMSDataParser {
         Map procMap = new HashMap<String, enProcedure>();
             procMap.put("*6296", enUser.АЛИНА);
             procMap.put("*5825", enUser.МАКС);
+            procMap.put("*4853", enUser.МАКС);
 
 
         enUser result = (enUser) procMap.get(getElement(s.split(" "), "Karta", 1));
         if (result == null) {
-            result = enUser.Unknown;
+            result = enUser.МАКС;
         }
         return result;
     }
